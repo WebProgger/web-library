@@ -47,7 +47,8 @@ class core {
 			'MOD_TITLE',
 			'MOD_DESC',
 			'MOD_AUTHOR',
-			'MOD_VERSION',
+            'MOD_VERSION',
+            'MOD_PAGE',
 		);
 
 		$result = true;
@@ -58,7 +59,23 @@ class core {
 
         return $result;
         
-	}
+    }
+    
+    public function check_theme_page($mod) {
+
+        if(!file_exists(LIB_CONFIG_PATH.'modules/'.$mod.'.php')){
+			return false;
+        }
+
+        require(LIB_CONFIG_PATH.'modules/'.$mod.'.php');
+
+        if($cfg['MOD_PAGE'] == false) {
+            return false;
+        }
+
+        return true;
+
+    }
 
     public function load_module($mod){
 
@@ -72,7 +89,7 @@ class core {
 		
 		if(!file_exists(LIB_CONFIG_PATH.'modules/'.$mod.'.php')){
 			return $this->sp(LIB_THEME_PATH."default_sp/mod_disable.html");
-		}
+        }
 
 		require_once(LIB_CONFIG_PATH.'modules/'.$mod.'.php');
 

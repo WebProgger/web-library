@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo($data['TITLE']); ?></title>
+    <base href="<?php echo LIB_BASE_URL ?>">
+    <?php echo $data['DEF_HEADER']; ?>
+    <?php echo $data['HEADER']; ?>
+</head>
+<body>
+    <header>
+        <nav>
+            <input type="checkbox" id="checkbox-menu">
+            <label for="checkbox-menu">
+                <ul class="menu touch">
+                    <li><a class="logo" href="#">Library</a></li>
+                    <li><a href="#">Главная</a></li>
+                    <li><a href="#">Книги</a></li>
+                    <li><a href="#">Книги</a></li>
+                    <li><a href="#">Книги</a></li>
+                    <li><a href="#">Книги</a></li>
+                    <li><a class="auth" href="#">Войти</a></li>
+                </ul>
+                <span class="toggle">☰</span>
+            </label>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <div class="container-auth-form">
+                <div class="wrap-auth-form">
+                    <?php echo($data['CONTENT']); ?>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section>
+
+    </section>
+
+    <script src="<?php echo LIB_THEME_URL ?>vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="<?php echo LIB_THEME_URL ?>vendor/animsition/js/animsition.min.js"></script>
+    <script src="<?php echo LIB_THEME_URL ?>vendor/bootstrap/js/popper.js"></script>
+    <script src="<?php echo LIB_THEME_URL ?>vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?php echo LIB_THEME_URL ?>vendor/select2/select2.min.js"></script>
+    <script src="<?php echo LIB_THEME_URL ?>vendor/daterangepicker/moment.min.js"></script>
+    <script src="<?php echo LIB_THEME_URL ?>vendor/daterangepicker/daterangepicker.js"></script>
+    <script src="<?php echo LIB_THEME_URL ?>vendor/countdowntime/countdowntime.js"></script>
+
+    <script src="<?php echo LIB_THEME_JS_URL ?>modules/auth/auth.js"></script>
+
+</body>
+</html>

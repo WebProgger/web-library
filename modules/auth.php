@@ -20,9 +20,11 @@ class module {
 
 		$this->core->bc = $this->core->gen_bc($bc);
 
-		$this->core->header .= $this->core->sp(LIB_THEME_PATH."header.html");
-
 		*/
+
+		$this->core->header = $this->core->sp(LIB_THEME_PATH.'modules/auth/header.html');
+
+		
 	}
 
 	public function content() {
@@ -31,7 +33,7 @@ class module {
 			'1' => 1
 		);
 
-        return $this->core->sp(LIB_THEME_MOD_PATH.'auth/auth.html', $data);
+        return $this->core->sp(LIB_THEME_PATH.'modules/auth/auth.html', $data);
         
     }
     

@@ -11,7 +11,7 @@ else { $page = substr($_SERVER['REQUEST_URI'], 1); if(!preg_match('/^[A-z0-9]{3,
 $core->def_header = $core->sp(LIB_THEME_PATH.'header.html');
 
 switch($page) {
-    case 'auth':
+    case 'auth1':
     case 'register':
         $content = $core->load_def_module($page);
     break;
@@ -33,6 +33,11 @@ $data_global = array(
     'SEARCH'        => ''
 );
 
-echo $core->sp(LIB_THEME_PATH.'global.html', $data_global);
+if($core->check_theme_page($page)) {
+    echo $core->sp(LIB_THEME_PATH.'theme_pages/'.$page.'.html', $data_global);
+} else {
+    echo $core->sp(LIB_THEME_PATH.'global.html', $data_global);
+}
+
 
 ?>
