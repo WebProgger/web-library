@@ -1,7 +1,7 @@
 * {
 	margin: 0px; 
 	padding: 0px; 
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body, html {
@@ -110,7 +110,7 @@ iframe {
 }
 
 .text-center {
-    padding-top: 115px;
+    padding-top: 80px;
     text-align: center;
 }
 
@@ -134,7 +134,7 @@ iframe {
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
-    padding: 77px 55px 33px 55px;
+    padding: 70px 55px 33px 55px;
   
     box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
@@ -153,7 +153,7 @@ iframe {
     color: #333333;
     line-height: 1.2;
     text-align: center;
-    padding-bottom: 26px;
+    padding-bottom: 50px;
 }
 
 .auth-form-input {

@@ -10,7 +10,15 @@ class core {
 
     public $db, $cfg, $user = false;
 
-    public $lng, $lng_mod, $lng_block, $cfg_mod, $cfg_block = array();
+    public $cfg_mod, $cfg_block = array();
+
+    public $captcha = array(
+
+        0 => "---",
+		1 => "ReCaptcha",
+        2 => "KeyCaptcha"
+        
+    );
 
     public function __construct() {
 
@@ -38,6 +46,26 @@ class core {
 
         $this->title = $this->cfg->main['s_name'];
 
+        require_once(LIB_ENGINE_PATH.'user.class.php');
+
+        $this->user = new user($this);
+
+    }
+
+    public function random($length = 10, $safe = true) {
+
+        $chars	= "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789";
+		if(!$safe){ $chars .= '$()#@!'; }
+
+		$string	= "";
+
+		$len	= strlen($chars) - 1;  
+		while (strlen($string) < $length){
+			$string .= $chars[mt_rand(0,$len)];  
+		}
+
+		return $string;
+
     }
 
     public function check_cfg($cfg){
@@ -60,6 +88,28 @@ class core {
         return $result;
         
     }
+
+    public function check_cfg_block($cfg) {
+
+		$format = array(
+			'ENABLE',
+			'POSITION',
+			'TITLE',
+			'DESC',
+			'AUTHOR',
+		);
+
+		$result = true;
+
+		foreach($format as $key => $val) {
+
+            if(!isset($cfg[$val])) { $result = false; }
+            
+		}
+
+        return $result;
+        
+	}
     
     public function check_theme_page($mod) {
 
@@ -132,6 +182,65 @@ class core {
         return $module->content();
         
     }
+
+    public function load_def_blocks() {
+
+		$format = array('ENABLE', 'POSITION', 'TITLE', 'DESC', 'AUTHOR');
+
+		$configs = scandir(LIB_CONFIG_PATH.'blocks');
+
+		if(empty($configs)){ return false; }
+
+		$content = '';
+		$blocks = array();
+
+		foreach($configs as $key => $file) {
+
+			$this->cfg_b = $cfg = false;
+
+			if($file=='.' || $file=='..' || substr($file, -4)!='.php'){ continue; }
+
+			include(LIB_CONFIG_PATH.'blocks/'.$file);
+
+			if($cfg === false) { continue; }
+
+			$cfg_keys = array_keys($cfg);
+
+			$diff = array_diff($format, $cfg_keys);
+
+			if(!empty($diff) || !$cfg['ENABLE']){ continue; }
+
+			if(!file_exists(LIB_BLOCK_PATH.$file)){ continue; }
+
+            include(LIB_BLOCK_PATH.$file);
+            
+            $this->cfg_block = $cfg;
+
+			$classname = 'block_'.substr($file, 0, -4);
+
+			if(!class_exists($classname)){ continue; }
+
+			$obj = new $classname($this);
+
+			if(!method_exists($obj, 'content')){ unset($obj); continue; }
+
+			$blocks[$cfg['POSITION']] = $obj->content();
+
+            unset($obj);
+            
+		}
+
+		ksort($blocks);
+
+		foreach($blocks as $key => $val) {
+
+            $content .= $val;
+            
+		}
+
+        return $content;
+        
+	}
     
     public function sp($path, $data=array()) {
 
@@ -142,6 +251,54 @@ class core {
         return ob_get_clean();
 
     }
+
+    public function gen_password($string = '', $crypt = false) {
+
+		if($crypt === false){ $crypt = $this->cfg->main['crypt']; }
+
+		switch($crypt) {
+
+			case 1: return md5(md5($string)); break;
+
+            default: return md5($string); break;
+            
+        }
+        
+    }
+
+    public function base_url(){
+
+        $pos = strripos($_SERVER['PHP_SELF'], 'index');
+
+        return mb_substr($_SERVER['PHP_SELF'], 0, $pos, 'UTF-8');
+        
+	}
+    
+    public function notify($title='', $text='', $type=2, $url='', $out=false) {
+
+		$url = (!$out) ? $this->base_url().$url : $url;
+
+		if($out || (empty($title) && empty($text))){ header("Location: ".$url); exit; }
+
+		switch($type){
+			case 2: $_SESSION['notify_type'] = 'alert-error'; break;
+			case 3: $_SESSION['notify_type'] = 'alert-success'; break;
+			case 4: $_SESSION['notify_type'] = 'alert-info'; break;
+
+			default: $_SESSION['notify_type'] = ''; break;
+		}
+
+		$_SESSION['lib_notify'] = true;
+		$_SESSION['notify_title'] = $title;
+		$_SESSION['notify_msg'] = $text;
+
+		header("Location: $url");
+
+        exit;
+
+	}
+
+    
 
 }
 

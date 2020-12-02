@@ -1,7 +1,5 @@
 <?php
 
-if(!defined("LIB")){ exit("Hacking Attempt!"); }
-
 $cfg = array(
 	'MOD_ENABLE'		=> true,
 	'MOD_TITLE'			=> 'Панель управления',

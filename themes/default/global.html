@@ -20,7 +20,7 @@
                     <li><a href="#">Книги</a></li>
                     <li><a href="#">Книги</a></li>
                     <li><a href="#">Книги</a></li>
-                    <li><a class="auth" href="#">Войти</a></li>
+                    <li><a class="auth" href="/auth">Войти</a></li>
                 </ul>
                 <span class="toggle">☰</span>
             </label>
@@ -97,6 +97,7 @@
             <p>sdadsad</p>
             
             <?php echo($data['CONTENT']); ?>
+
         </section>
     </main>
 
@@ -105,6 +106,8 @@
 
         </section>
     </footer>
+
+    <?php echo $data['BLOCKS']; ?>
 
 </body>
 </html>

@@ -32,7 +32,7 @@ class db {
 
     public function query($string) {
 
-        $this->result = @$this->obj->query($query);
+        $this->result = @$this->obj->query($string);
 
         return $this->result;
 
@@ -61,6 +61,12 @@ class db {
         return $this->obj->real_escape_string($string);
 
     }
+
+    public function HSC($string='') {
+
+        return htmlspecialchars($string);
+        
+	}
 
     public function error() {
 

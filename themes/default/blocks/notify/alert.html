@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="filters hidden">
+    <defs>
+        <filter id="blur">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0,0" />
+        </filter>
+    </defs>
+</svg>
+<div class="modal-container">
+    <div class="modal-overlay"></div>
+    <div class="modal-wrapper">
+        <div class="modal js-blur <?php echo $data['TYPE']; ?>">
+            <button class="close-modal ">×</button>
+            <h2><?php echo $data['TITLE']; ?></h2>
+            <p><?php echo $data['MESSAGE']; ?></p>
+        </div>
+    </div>
+</div>
+
