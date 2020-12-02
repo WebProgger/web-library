@@ -14,7 +14,7 @@
             <input type="checkbox" id="checkbox-menu">
             <label for="checkbox-menu">
                 <ul class="menu touch">
-                    <li><a class="logo" href="#">Library</a></li>
+                    <img src="<?php echo LIB_THEME_URL ?>img/favicon.ico" width="96" height="96">
                     <li><a href="#">Главная</a></li>
                     <li><a href="#">Книги</a></li>
                     <li><a href="#">Книги</a></li>
@@ -27,15 +27,84 @@
         </nav>
     </header>
 
-    <main>
-        <section>
+    <main class="main-wrapper">
+        <section class="sidebar">
+
+            <input class="checkbox-category" type="checkbox" id="checkbox-category-1">
+            <label for="checkbox-category-1">
+                <div class="sidebar-header">
+                    <span class="category_header"> <i class="fa fa-angle-down"></i> Жанр: </span>
+                </div>
+                <div class="sidebar-content">
+                    <ul class="category ctouch">
+                        <label class="label-category" for="books_category_1">
+                            <li>
+                                <input class="radio" type="radio" id="books_category_1" name="books_category">
+                                <p>1</p>
+                            </li>
+                        </label>
+                        <label class="label-category" for="books_category_2">
+                            <li>
+                                <input class="radio" type="radio" id="books_category_2" name="books_category">
+                                <p>1</p>
+                            </li>
+                        </label>
+                        <label class="label-category" for="books_category_3">
+                            <li>
+                                <input class="radio" type="radio" id="books_category_3" name="books_category">
+                                <p>1</p>
+                            </li>
+                        </label>
+                    </ul>
+                </div>
+            </label>
+
+            <div class="outline"></div>
+
+            <input class="checkbox-category" type="checkbox" id="checkbox-category-2">
+            <label for="checkbox-category-2">
+                <div class="sidebar-header">
+                    <span class="category_header"> <i class="fa fa-angle-down"></i> Жанр: </span>
+                </div>
+                <div class="sidebar-content">
+                    <ul class="category ctouch">
+                        <label class="label-category" for="books_category_1">
+                            <li>
+                                <input class="radio" type="radio" id="books_category_1" name="books_category">
+                                <p>1</p>
+                            </li>
+                        </label>
+                        <label class="label-category" for="books_category_2">
+                            <li>
+                                <input class="radio" type="radio" id="books_category_2" name="books_category">
+                                <p>1</p>
+                            </li>
+                        </label>
+                        <label class="label-category" for="books_category_3">
+                            <li>
+                                <input class="radio" type="radio" id="books_category_3" name="books_category">
+                                <p>1</p>
+                            </li>
+                        </label>
+                    </ul>
+                </div>
+            </label>
+
+        </section>
+
+        <section class="content">
+            <p>dsdssd</p>
+            <p>sdadsad</p>
+            
             <?php echo($data['CONTENT']); ?>
         </section>
     </main>
 
-    <section>
+    <footer>
+        <section>
 
-    </section>
+        </section>
+    </footer>
 
 </body>
 </html>
