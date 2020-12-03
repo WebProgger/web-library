@@ -28,7 +28,7 @@ $data_global = array(
     'HEADER'        => $core->header,
     'DEF_HEADER'    => $core->def_header,
     'CFG'           => $core->cfg->main,
-    'MENU'          => '',
+    'MENU'          => $core->menu->_list(),
     'BREADCRUMBS'   => '',
     'SEARCH'        => ''
 );

@@ -4,7 +4,7 @@ if(!defined('LIB')) { exit('Hacking Attempt!'); }
 
 class core {
 
-    public $title, $header;
+    public $title, $header, $menu;
 
     public $def_header = '';
 
@@ -28,7 +28,7 @@ class core {
 
         require(LIB_ENGINE_PATH.'db/mysqli.class.php');
 
-        $this->db = new db($this->cfg->db['host'], $this->cfg->db['user'], $this->cfg->db['pass'], $this->cfg->db['base'], $this->cfg->db['port'], $this);
+		$this->db = new db($this->cfg->db['host'], $this->cfg->db['user'], $this->cfg->db['pass'], $this->cfg->db['base'], $this->cfg->db['port'], $this);
 
         $base_url = $this->cfg->main['s_root'];
 
@@ -48,7 +48,11 @@ class core {
 
         require_once(LIB_ENGINE_PATH.'user.class.php');
 
-        $this->user = new user($this);
+		$this->user = new user($this);
+		
+		require_once(LIB_ENGINE_PATH.'menu.class.php');
+		
+		$this->menu = new menu($this);
 
     }
 
@@ -295,6 +299,24 @@ class core {
 		header("Location: $url");
 
         exit;
+
+	}
+
+	public function is_access($id=0) {
+
+		if($id == 1) { return true; }
+
+		if($id == 0) { return false; }
+
+		if(empty(@$this->user->permissions)) { return false; }
+
+		for($i = 0; $i < count(@$this->user->permissions); $i++ ) {
+
+			if(@$this->user->permissions[$i] === $id) { return true; }
+
+		}
+
+		return false;
 
 	}
 

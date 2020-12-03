@@ -15,6 +15,8 @@ class user {
     public $is_auth = false;
     public $auth;
 
+    public $permissions = array();
+
 
     public function __construct($core) {
 
@@ -30,7 +32,9 @@ class user {
 
         if(!isset($cookie)){ $this->set_unauth(); $this->core->notify(); }
 
-        $query = $this->db->query("SELECT `iduser`, `surname`, `name`, `middle_name`, `idrole`, `mail`, `password`, `token` FROM `users`");
+        $query = $this->db->query("SELECT `users`.`iduser`, `users`.`surname`, `users`.`name`, `users`.`middle_name`, `users`.`idrole`, `users`.`mail`, 
+        `users`.`password`, `users`.`token`, `roles`.`permissions`
+        FROM `users`, `roles` WHERE `roles`.`idrole` = `users`.`idrole`");
 
         if(!$query || $this->db->num_rows($query) <= 0) { $this->set_unauth(); $this->core->notify(); }
 
@@ -53,6 +57,12 @@ class user {
         $this->idrole      = intval($ar['idrole']);
 
         $this->is_auth     = true;
+
+        $permissions       = $this->db->HSC($ar['permissions']);
+
+        $this->permissions = explode(",", $permissions);
+
+        if(isset($_POST['logout'])) { $this->set_unauth(); $this->core->notify(); }
         
     }
 

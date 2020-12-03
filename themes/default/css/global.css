@@ -37,6 +37,35 @@ nav {
     list-style-type: none;
 }
 
+.profile a {
+    color: #4285f4;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 10px 10px;
+}
+
+.profile a:hover {
+    color: #083d92;
+    transition: all .10s linear;
+}
+
+.profile button {
+    border: none;
+    color: #4285f4;
+    margin: 10px 10px;
+    background: none;
+}
+
+.profile button:hover {
+    color: #083d92;
+    transition: all .10s linear;
+}
+
+.profile button:focus {
+    border: none;
+    outline: none;
+}
+
 .menu li a {
     color: #4285f4;
     text-decoration: none;
