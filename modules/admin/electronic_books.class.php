@@ -23,8 +23,8 @@ class submodule {
 
 		if(!$this->core->is_access('2')) { $this->core->notify('Ошибка!', 'Доступ запрещен!', 2); }
 
-		if(isset($_POST['name']) && isset($_POST['description']) && isset($_POST['author']) && 
-			isset($_POST['genre']) && isset($_POST['count']) && isset($_POST['uuid']) ) { 
+		if(!empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['author']) &&
+		!empty($_POST['genre']) && !empty($_POST['count']) && !empty($_POST['uuid']) ) { 
 
 				$name = $this->db->safesql($_POST['name']);
 				$desc = $this->db->safesql($_POST['description']);
@@ -37,7 +37,7 @@ class submodule {
 
 				$query = $this->db->query("INSERT INTO `books` (`name`, `description`, `author`, `idgenre`, `count`, `uuid`) VALUES ('$name', '$desc', '$author', $genre, $count, '$uuid')");
 
-				if(!$query) { $this->core->notify('Ошибка!', 'Системная ошибка! '."INSERT INTO `books` (`name`, `description`, `author`, `idgenre`, `count`, `uuid`) VALUES ('$name', '$desc', '$author', $genre, $count, '$uuid')", 2); }
+				if(!$query) { $this->core->notify('Ошибка!', 'Системная ошибка!', 2); }
 
 				$this->core->notify('Успех!', 'Книга успешно добавлена!', 3);
 
