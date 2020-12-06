@@ -67,8 +67,8 @@ class menu {
 
 			if(!$this->core->is_access($ar['permissions'])){ continue; }
 			
-			$array[$ar['id']] = array(
-				"id" => $ar['id'],
+			$array[$ar['idmenu']] = array(
+				"id" => $ar['idmenu'],
 				"title" => $ar['title'],
 				"url" => $ar['url'],
 				"permissions" => $ar['permissions']

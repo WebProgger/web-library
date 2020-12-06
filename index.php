@@ -6,7 +6,7 @@ require_once('./system.php');
 
 if( $_SERVER['REQUEST_URI'] == '/' ) { $page = 'index'; }
 
-else { $page = substr($_SERVER['REQUEST_URI'], 1); if(!preg_match('/^[A-z0-9]{3,15}$/', $page)) { exit('error url'); } }
+else { $page_arr = explode("/", $_SERVER['REQUEST_URI']); $page = $page_arr[1]; if(!preg_match('/^[A-z0-9]{3,15}$/', $page)) { exit('error url'); } }
 
 $core->def_header = $core->sp(LIB_THEME_PATH.'header.html');
 

@@ -63,9 +63,6 @@ class module {
 	
 		return $this->core->sp(LIB_THEME_PATH.'modules/auth/auth.html', $data);
 
-
-		
-        
     }
     
 }

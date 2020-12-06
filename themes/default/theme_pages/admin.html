@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo($data['TITLE']); ?></title>
+    <base href="<?php echo LIB_BASE_URL ?>">
+    <?php echo $data['DEF_HEADER']; ?>
+    <?php echo $data['HEADER']; ?>
+</head>
+<body>
+    <header>
+        <nav>
+            <input type="checkbox" id="checkbox-menu">
+            <label for="checkbox-menu">
+                <ul class="menu touch">
+                    <img src="<?php echo LIB_THEME_URL ?>img/favicon.ico" width="96" height="96">
+                    <?php echo $data['MENU']; ?>
+                </ul>
+                <span class="toggle">☰</span>
+            </label>
+        </nav>
+    </header>
+
+    <main class="main-wrapper">
+
+        <section class="content">
+            
+            <?php echo($data['CONTENT']); ?>
+
+        </section>
+    </main>
+
+    <footer>
+        <section>
+
+        </section>
+    </footer>
+
+    <?php echo $data['BLOCKS']; ?>
+
+</body>
+</html>

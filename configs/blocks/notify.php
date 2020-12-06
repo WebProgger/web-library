@@ -5,7 +5,7 @@ $cfg = array(
 	'POSITION' => 1,
 	'TITLE' => 'Оповещения',
 	'DESC' => 'Блок вывода оповещений',
-	'AUTHOR' => 'WillyGames',
+	'AUTHOR' => 'Alexsandr Minakov',
 	'VERSION' => '1.0',
 );
 
