@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Дек 03 2020 г., 19:11
+-- Время создания: Дек 08 2020 г., 19:40
 -- Версия сервера: 8.0.15
 -- Версия PHP: 5.6.38
 
@@ -39,6 +39,14 @@ CREATE TABLE `books` (
   `uuid` varchar(12) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Дамп данных таблицы `books`
+--
+
+INSERT INTO `books` (`idbook`, `name`, `description`, `author`, `idgenre`, `count`, `electronic_src`, `uuid`) VALUES
+(1, 'Тест', 'Тест', 'Тест', 1, 10, NULL, '1213фыв'),
+(2, 'Тест', 'Тест', 'Тест', 1, 10, NULL, '131Тест');
+
 -- --------------------------------------------------------
 
 --
@@ -67,6 +75,13 @@ CREATE TABLE `genres` (
   `name` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Дамп данных таблицы `genres`
+--
+
+INSERT INTO `genres` (`idgenre`, `name`) VALUES
+(1, 'Общее');
+
 -- --------------------------------------------------------
 
 --
@@ -85,7 +100,48 @@ CREATE TABLE `menu` (
 --
 
 INSERT INTO `menu` (`idmenu`, `title`, `url`, `permissions`) VALUES
-(1, 'Главная', '/', '1');
+(1, 'Главная', '/', '1'),
+(2, 'Панель управления', '/admin', '2');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `menu_admin`
+--
+
+CREATE TABLE `menu_admin` (
+  `idmenu` int(11) NOT NULL,
+  `title` varchar(45) DEFAULT NULL,
+  `url` varchar(90) DEFAULT NULL,
+  `permissions` varchar(120) DEFAULT NULL,
+  `idgroup` int(11) DEFAULT NULL,
+  `icon` varchar(150) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `menu_admin`
+--
+
+INSERT INTO `menu_admin` (`idmenu`, `title`, `url`, `permissions`, `idgroup`, `icon`) VALUES
+(1, 'Добавление электронных изданий', '/admin/electronic_books', '2', 1, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `menu_admin_group`
+--
+
+CREATE TABLE `menu_admin_group` (
+  `idgroup` int(11) NOT NULL,
+  `title` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `menu_admin_group`
+--
+
+INSERT INTO `menu_admin_group` (`idgroup`, `title`) VALUES
+(1, 'Общее');
 
 -- --------------------------------------------------------
 
@@ -103,7 +159,8 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`idpermission`, `name`) VALUES
-(1, 'Общий доступ');
+(1, 'Общий доступ'),
+(2, 'Доступ к панели управления');
 
 -- --------------------------------------------------------
 
@@ -135,7 +192,7 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`idrole`, `name`, `permissions`) VALUES
-(1, 'Администратор', '1');
+(1, 'Администратор', '1,2');
 
 -- --------------------------------------------------------
 
@@ -159,7 +216,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`iduser`, `surname`, `name`, `middle_name`, `idrole`, `mail`, `password`, `token`) VALUES
-(1, 'Минаков', 'Александр', 'Андреевич', 1, 'sasha_17082001@mail.ru', '5f1bc1cc080a9edd2f002274aad73433', 'XsX2pfKHTzFOJ4kzsOqr57OLjLghHtu3');
+(1, 'Минаков', 'Александр', 'Андреевич', 1, 'sasha_17082001@mail.ru', '5f1bc1cc080a9edd2f002274aad73433', 'PGucX6L4KOO05pCnh7uxY6RRzWcSgWzm'),
+(2, 'Админов', 'Админ', 'Админович', 1, 'admin@library.ru', '21232f297a57a5a743894a0e4a801fc3', '5Hm0aNi9fNc28SuxMugf6bzXL5RM08kj');
 
 --
 -- Индексы сохранённых таблиц
@@ -190,6 +248,19 @@ ALTER TABLE `genres`
 --
 ALTER TABLE `menu`
   ADD PRIMARY KEY (`idmenu`);
+
+--
+-- Индексы таблицы `menu_admin`
+--
+ALTER TABLE `menu_admin`
+  ADD PRIMARY KEY (`idmenu`),
+  ADD KEY `fk_menu_admin_menu_admin_group1_idx` (`idgroup`);
+
+--
+-- Индексы таблицы `menu_admin_group`
+--
+ALTER TABLE `menu_admin_group`
+  ADD PRIMARY KEY (`idgroup`);
 
 --
 -- Индексы таблицы `permissions`
@@ -223,16 +294,64 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT для таблицы `books`
+--
+ALTER TABLE `books`
+  MODIFY `idbook` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT для таблицы `books_archive`
+--
+ALTER TABLE `books_archive`
+  MODIFY `idbook` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `genres`
+--
+ALTER TABLE `genres`
+  MODIFY `idgenre` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT для таблицы `menu`
 --
 ALTER TABLE `menu`
+  MODIFY `idmenu` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `menu_admin`
+--
+ALTER TABLE `menu_admin`
   MODIFY `idmenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT для таблицы `menu_admin_group`
+--
+ALTER TABLE `menu_admin_group`
+  MODIFY `idgroup` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `idpermission` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idpermission` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `rented_books`
+--
+ALTER TABLE `rented_books`
+  MODIFY `idrented` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `idrole` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT для таблицы `users`
+--
+ALTER TABLE `users`
+  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -249,6 +368,12 @@ ALTER TABLE `books`
 --
 ALTER TABLE `books_archive`
   ADD CONSTRAINT `fk_books_genres10` FOREIGN KEY (`idgenre`) REFERENCES `genres` (`idgenre`);
+
+--
+-- Ограничения внешнего ключа таблицы `menu_admin`
+--
+ALTER TABLE `menu_admin`
+  ADD CONSTRAINT `fk_menu_admin_menu_admin_group1` FOREIGN KEY (`idgroup`) REFERENCES `menu_admin_group` (`idgroup`);
 
 --
 -- Ограничения внешнего ключа таблицы `rented_books`
