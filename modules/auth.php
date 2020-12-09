@@ -43,9 +43,11 @@ class module {
 
 		if(!$update) { $this->core->notify("Ошибка!", "Системная ошибка!", 2); }
 
+		$create_cookie = $iduser."_".$new_token;
+
 		$safetime = time()+3600;
 
-		setcookie("lib_user", $new_token, $safetime);
+		setcookie("lib_user", $create_cookie, $safetime, '/');
 
 		$this->core->notify("Успех!", "Вы успешно авторизировались!", 3);
 

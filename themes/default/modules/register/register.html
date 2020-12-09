@@ -1,7 +1,12 @@
 <form class="auth-form validate-form" method="POST">
     <span class="auth-form-title">
-        Авторизация
+        Регистрация
     </span>
+
+    <div class="auth-form-input validate-input" data-validate="Используйте ФИО. Например Иванов Иван Иванович">
+        <input class="input" type="text" name="fio">
+        <span class="focus-input" data-placeholder="ФИО"></span>
+    </div>
 
     <div class="auth-form-input validate-input" data-validate="Используйте example@mail.ru">
         <input class="input" type="text" name="mail">
@@ -16,10 +21,18 @@
         <span class="focus-input" data-placeholder="Пароль"></span>
     </div>
 
+    <div class="auth-form-input validate-input" data-validate="Повторите пароль">
+        <span class="btn-show-pass">
+            <i class="zmdi zmdi-eye"></i>
+        </span>
+        <input class="input" type="password" name="password2">
+        <span class="focus-input" data-placeholder="Пароль"></span>
+    </div>
+
     <div class="container-auth-form-btn">
         <div class="auth-form-btn">
             <div class="auth-form-bgbtn"></div>
-            <button class="btn">Авторизироваться</button>
+            <button class="btn">Зарегистрироваться</button>
         </div>
     </div>
 
@@ -27,11 +40,11 @@
 
     <div class="text-center">
         <span class="txt1">
-            Не зарегистрированы?
+            Уже зарегистрированы?
         </span>
 
-        <a href="/register" class="txt2">
-            Зарегистрироваться
+        <a href="/auth" class="txt2">
+            Авторизироваться
         </a>
     </div>
 

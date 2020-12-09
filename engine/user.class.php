@@ -28,13 +28,16 @@ class user {
 
         if(!isset($_COOKIE['lib_user'])) { return false; }
 
-        $cookie = $_COOKIE['lib_user'];
+        $cookie = explode("_", $_COOKIE['lib_user']);
 
-        if(!isset($cookie)){ $this->set_unauth(); $this->core->notify(); }
+        if(!isset($cookie[0], $cookie[1])) { $this->set_unauth(); $this->core->notify(); }
+
+        $c_id = intval($cookie[0]);
+        $c_token = $cookie[1];
 
         $query = $this->db->query("SELECT `users`.`iduser`, `users`.`surname`, `users`.`name`, `users`.`middle_name`, `users`.`idrole`, `users`.`mail`, 
         `users`.`password`, `users`.`token`, `roles`.`permissions`
-        FROM `users`, `roles` WHERE `roles`.`idrole` = `users`.`idrole`");
+        FROM `users`, `roles` WHERE `roles`.`idrole` = `users`.`idrole` AND `users`.`iduser` = $c_id");
 
         if(!$query || $this->db->num_rows($query) <= 0) { $this->set_unauth(); $this->core->notify(); }
 
@@ -43,9 +46,9 @@ class user {
         $token       = $this->db->HSC($ar['token']);
         $password    = $this->db->HSC($ar['password']);
 
-        if($_COOKIE['lib_user'] !== $token) { $this->set_unauth(); $this->core->notify(); }
+        if($c_token !== $token) { $this->set_unauth(); $this->core->notify(); }
 
-        $this->iduser          = intval($ar['iduser']);
+        $this->iduser      = intval($ar['iduser']);
 
         $this->mail        = $this->db->HSC($ar['mail']);
         $this->password    = $this->db->HSC($ar['password']);

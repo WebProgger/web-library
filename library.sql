@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Дек 08 2020 г., 19:40
+-- Время создания: Дек 09 2020 г., 15:24
 -- Версия сервера: 8.0.15
 -- Версия PHP: 5.6.38
 
@@ -36,6 +36,7 @@ CREATE TABLE `books` (
   `idgenre` int(11) DEFAULT NULL,
   `count` int(11) DEFAULT NULL,
   `electronic_src` text,
+  `cover` varchar(150) NOT NULL DEFAULT '/uploads/books/standart.jpg',
   `uuid` varchar(12) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -43,9 +44,9 @@ CREATE TABLE `books` (
 -- Дамп данных таблицы `books`
 --
 
-INSERT INTO `books` (`idbook`, `name`, `description`, `author`, `idgenre`, `count`, `electronic_src`, `uuid`) VALUES
-(1, 'Тест', 'Тест', 'Тест', 1, 10, NULL, '1213фыв'),
-(2, 'Тест', 'Тест', 'Тест', 1, 10, NULL, '131Тест');
+INSERT INTO `books` (`idbook`, `name`, `description`, `author`, `idgenre`, `count`, `electronic_src`, `cover`, `uuid`) VALUES
+(1, 'Тест', 'Тест', 'Тест', 1, 2, NULL, '/uploads/books/standart.jpg', '1213фыв'),
+(2, 'Тест', 'Тест', 'Тест', 1, 10, NULL, '/uploads/books/standart.jpg', '131Тест');
 
 -- --------------------------------------------------------
 
@@ -61,6 +62,7 @@ CREATE TABLE `books_archive` (
   `idgenre` int(11) DEFAULT NULL,
   `count` int(11) DEFAULT NULL,
   `electronic_src` text,
+  `cover` varchar(150) NOT NULL DEFAULT '/uploads/books/standart.jpg',
   `uuid` varchar(12) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -192,7 +194,8 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`idrole`, `name`, `permissions`) VALUES
-(1, 'Администратор', '1,2');
+(1, 'Администратор', '1,2'),
+(2, 'Пользователь', '1');
 
 -- --------------------------------------------------------
 
@@ -216,8 +219,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`iduser`, `surname`, `name`, `middle_name`, `idrole`, `mail`, `password`, `token`) VALUES
-(1, 'Минаков', 'Александр', 'Андреевич', 1, 'sasha_17082001@mail.ru', '5f1bc1cc080a9edd2f002274aad73433', 'PGucX6L4KOO05pCnh7uxY6RRzWcSgWzm'),
-(2, 'Админов', 'Админ', 'Админович', 1, 'admin@library.ru', '21232f297a57a5a743894a0e4a801fc3', '5Hm0aNi9fNc28SuxMugf6bzXL5RM08kj');
+(1, 'Минаков', 'Александр', 'Андреевич', 1, 'sasha_17082001@mail.ru', '5f1bc1cc080a9edd2f002274aad73433', 'X7nslAt3wBgDMnC7sijpRi65V0QT7xPF'),
+(2, 'Админов', 'Админ', 'Админович', 1, 'admin@library.ru', '21232f297a57a5a743894a0e4a801fc3', 'psC51MKAQTH1EuqlZIp8Ap3m314RWuWX'),
+(4, 'Анатолий', 'Александрович', 'Волков', 2, 'volkov.tolya@mail.ru', 'e10adc3949ba59abbe56e057f20f883e', 'rZ8l1BdCNHLYZnvPSPnwZOx2Wq69opyH');
 
 --
 -- Индексы сохранённых таблиц
@@ -345,13 +349,13 @@ ALTER TABLE `rented_books`
 -- AUTO_INCREMENT для таблицы `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `idrole` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idrole` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц

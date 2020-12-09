@@ -56,6 +56,12 @@ class db {
 
     }
 
+    public function insert_id() {
+
+        return $this->obj->insert_id;
+        
+	}
+
     public function safesql($string) {
 
         return $this->obj->real_escape_string($string);
