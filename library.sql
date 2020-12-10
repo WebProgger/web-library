@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Дек 09 2020 г., 15:24
+-- Время создания: Дек 10 2020 г., 20:05
 -- Версия сервера: 8.0.15
 -- Версия PHP: 5.6.38
 
@@ -34,9 +34,14 @@ CREATE TABLE `books` (
   `description` text,
   `author` varchar(45) DEFAULT NULL,
   `idgenre` int(11) DEFAULT NULL,
+  `year` int(4) DEFAULT NULL,
+  `idlanguage` int(11) DEFAULT NULL,
+  `pages` int(11) DEFAULT NULL,
+  `publisher` varchar(45) DEFAULT NULL,
+  `city_print` varchar(45) DEFAULT NULL,
   `count` int(11) DEFAULT NULL,
   `electronic_src` text,
-  `cover` varchar(150) NOT NULL DEFAULT '/uploads/books/standart.jpg',
+  `cover` varchar(150) DEFAULT NULL,
   `uuid` varchar(12) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -44,9 +49,8 @@ CREATE TABLE `books` (
 -- Дамп данных таблицы `books`
 --
 
-INSERT INTO `books` (`idbook`, `name`, `description`, `author`, `idgenre`, `count`, `electronic_src`, `cover`, `uuid`) VALUES
-(1, 'Тест', 'Тест', 'Тест', 1, 2, NULL, '/uploads/books/standart.jpg', '1213фыв'),
-(2, 'Тест', 'Тест', 'Тест', 1, 10, NULL, '/uploads/books/standart.jpg', '131Тест');
+INSERT INTO `books` (`idbook`, `name`, `description`, `author`, `idgenre`, `year`, `idlanguage`, `pages`, `publisher`, `city_print`, `count`, `electronic_src`, `cover`, `uuid`) VALUES
+(9, 'Параша Лупалова', 'История жизни необыкновенной и неустрашимой девушки, которая совершила высокий подвиг самоотвержения, и пешком пришла из Сибири в Петербург просить у Государя помилования своему отцу.', 'Местр Ксавье де', 2, 1864, 1, 13, 'Изданiе т-ва М. О. Вольфъ', 'Санкт-Петербург', 0, '/uploads/electronic_books/1288d2u8usad.fb2', '/uploads/books/sdjaisdjaisd1213.jpg', '1213aad');
 
 -- --------------------------------------------------------
 
@@ -60,9 +64,14 @@ CREATE TABLE `books_archive` (
   `description` text,
   `author` varchar(45) DEFAULT NULL,
   `idgenre` int(11) DEFAULT NULL,
+  `year` int(4) DEFAULT NULL,
+  `idlanguage` int(11) DEFAULT NULL,
+  `pages` int(11) DEFAULT NULL,
+  `publisher` varchar(45) DEFAULT NULL,
+  `city_print` varchar(45) DEFAULT NULL,
   `count` int(11) DEFAULT NULL,
   `electronic_src` text,
-  `cover` varchar(150) NOT NULL DEFAULT '/uploads/books/standart.jpg',
+  `cover` varchar(150) DEFAULT NULL,
   `uuid` varchar(12) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -82,7 +91,26 @@ CREATE TABLE `genres` (
 --
 
 INSERT INTO `genres` (`idgenre`, `name`) VALUES
-(1, 'Общее');
+(1, 'Общее'),
+(2, 'Русская классическая проза');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `languages`
+--
+
+CREATE TABLE `languages` (
+  `idlanguage` int(11) NOT NULL,
+  `name` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `languages`
+--
+
+INSERT INTO `languages` (`idlanguage`, `name`) VALUES
+(1, 'Русский');
 
 -- --------------------------------------------------------
 
@@ -232,20 +260,28 @@ INSERT INTO `users` (`iduser`, `surname`, `name`, `middle_name`, `idrole`, `mail
 --
 ALTER TABLE `books`
   ADD PRIMARY KEY (`idbook`),
-  ADD KEY `fk_books_genres1_idx` (`idgenre`);
+  ADD KEY `fk_books_genres1_idx` (`idgenre`),
+  ADD KEY `fk_books_languages1_idx` (`idlanguage`);
 
 --
 -- Индексы таблицы `books_archive`
 --
 ALTER TABLE `books_archive`
   ADD PRIMARY KEY (`idbook`),
-  ADD KEY `fk_books_genres1_idx` (`idgenre`);
+  ADD KEY `fk_books_genres1_idx` (`idgenre`),
+  ADD KEY `fk_books_languages1_idx` (`idlanguage`);
 
 --
 -- Индексы таблицы `genres`
 --
 ALTER TABLE `genres`
   ADD PRIMARY KEY (`idgenre`);
+
+--
+-- Индексы таблицы `languages`
+--
+ALTER TABLE `languages`
+  ADD PRIMARY KEY (`idlanguage`);
 
 --
 -- Индексы таблицы `menu`
@@ -301,7 +337,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `books`
 --
 ALTER TABLE `books`
-  MODIFY `idbook` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idbook` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT для таблицы `books_archive`
@@ -313,7 +349,13 @@ ALTER TABLE `books_archive`
 -- AUTO_INCREMENT для таблицы `genres`
 --
 ALTER TABLE `genres`
-  MODIFY `idgenre` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idgenre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT для таблицы `languages`
+--
+ALTER TABLE `languages`
+  MODIFY `idlanguage` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `menu`
@@ -365,13 +407,15 @@ ALTER TABLE `users`
 -- Ограничения внешнего ключа таблицы `books`
 --
 ALTER TABLE `books`
-  ADD CONSTRAINT `fk_books_genres1` FOREIGN KEY (`idgenre`) REFERENCES `genres` (`idgenre`);
+  ADD CONSTRAINT `fk_books_genres1` FOREIGN KEY (`idgenre`) REFERENCES `genres` (`idgenre`),
+  ADD CONSTRAINT `fk_books_languages1` FOREIGN KEY (`idlanguage`) REFERENCES `languages` (`idlanguage`);
 
 --
 -- Ограничения внешнего ключа таблицы `books_archive`
 --
 ALTER TABLE `books_archive`
-  ADD CONSTRAINT `fk_books_genres10` FOREIGN KEY (`idgenre`) REFERENCES `genres` (`idgenre`);
+  ADD CONSTRAINT `fk_books_genres10` FOREIGN KEY (`idgenre`) REFERENCES `genres` (`idgenre`),
+  ADD CONSTRAINT `fk_books_languages10` FOREIGN KEY (`idlanguage`) REFERENCES `languages` (`idlanguage`);
 
 --
 -- Ограничения внешнего ключа таблицы `menu_admin`

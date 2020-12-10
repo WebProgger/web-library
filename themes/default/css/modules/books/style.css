@@ -1,0 +1,83 @@
+.book-case {
+    padding: 10px;
+    border-bottom: 1px solid gray;
+}
+
+.book-content {
+    display: flex;
+}
+
+.book-info {
+    padding: 10px 20px;
+}
+
+.book-info-title {
+    padding-bottom: 50px;
+}
+
+.book-info-title a {
+    font-size: 24px;
+    text-decoration: none;
+    color: black;
+    border-bottom: 1px solid rgba(128,128,128,0.3);
+}
+
+.book-info-title a:hover {
+    color: orange;
+}
+
+.book-info-item {
+    display: flex;
+    padding: 7px 0;
+}
+
+.book-info-item p {
+    color: gray;
+    font-size: 18px;
+}
+
+.book-info-item a {
+    font-size: 18px;
+    text-decoration: none;
+    color: black;
+    margin-left: 5px;
+    border-bottom: 1px solid rgba(128,128,128,0.3);
+}
+
+.book-info-list {
+    display: flex;
+}
+
+.book-info-footer {
+    margin-top: 50px;
+}
+
+.book-btn {
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    padding: .8em 1em calc(.8em + 3px);
+    border-radius: 3px;
+    background: rgb(64,199,129);
+    box-shadow: 0 -3px rgb(53,167,110) inset;
+    transition: 0.2s;
+}
+
+.book-btn:hover {
+    background: rgb(53, 167, 110);
+}
+
+.book-btn:active {
+    background: rgb(33,147,90);
+    box-shadow: 0 3px rgb(33,147,90) inset;
+}
+
+.book-footer {
+    padding: 20px 0 5px 0;
+}
+
+.book-footer p {
+    color: gray;
+    font-size: 14px;
+    text-indent: 25px;
+}

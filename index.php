@@ -11,10 +11,12 @@ else { $page_arr = explode("/", $_SERVER['REQUEST_URI']); $page = $page_arr[1]; 
 $core->def_header = $core->sp(LIB_THEME_PATH.'header.html');
 
 switch($page) {
+    case 'index': $content = $core->load_def_module("books"); break;
     case 'auth':
     case 'register':
         $content = $core->load_def_module($page);
     break;
+
 
     default:
         $content = $core->load_module($page);
