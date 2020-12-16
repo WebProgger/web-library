@@ -6,12 +6,26 @@ require_once('./system.php');
 
 if( $_SERVER['REQUEST_URI'] == '/' ) { $page = 'index'; }
 
-else { $page_arr = explode("/", $_SERVER['REQUEST_URI']); $page = $page_arr[1]; if(!preg_match('/^[A-z0-9]{3,15}$/', $page)) { exit('error url'); } }
+else {
+
+    $page_arr = explode("/", $_SERVER['REQUEST_URI']);
+
+    $page = $page_arr[1];
+
+    $page_arr = explode("?", $page);
+
+    $page = $page_arr[0];
+
+    if(!preg_match('/^[A-z0-9]{3,15}$/', $page)) { exit('error url'); } 
+
+    }
 
 $core->def_header = $core->sp(LIB_THEME_PATH.'header.html');
 
 switch($page) {
-    case 'index': $content = $core->load_def_module("books"); break;
+    case 'index':
+        $content = $core->load_def_module('pages');
+    break;
     case 'auth':
     case 'register':
         $content = $core->load_def_module($page);

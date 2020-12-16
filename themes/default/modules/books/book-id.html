@@ -5,31 +5,31 @@
         </div>
         <div class="book-info">
             <div class="book-info-title">
-                <a href="/"><?php echo $data['NAME']; ?></a>
+                <a href="books?name=<?php echo $data['NAME']; ?>"><?php echo $data['NAME']; ?></a>
             </div>
         
             <div class="book-info-item">
                 <p>Автор:</p>
-                <a href="/"><?php echo $data['AUTHOR']; ?></a>
+                <a href="books?author=<?php echo $data['AUTHOR']; ?>"><?php echo $data['AUTHOR']; ?></a>
             </div>
             <div class="book-info-item">
                 <p>Жанр:</p>
-                <a href="/"><?php echo $data['GENRE']; ?></a>
+                <a href="books?genre=<?php echo $data['GENRE']; ?>"><?php echo $data['GENRE']; ?></a>
             </div>
             <div class="book-info-list">
                 <div class="book-info-item">
                     <p>Год:</p>
-                    <a href="/"><?php echo $data['YEAR']; ?></a>
+                    <a href="books?year=<?php echo $data['YEAR']; ?>"><?php echo $data['YEAR']; ?></a>
                     <p style="padding: 0 8px">|</p>
                 </div>
                 <div class="book-info-item">
                     <p>Язык:</p>
-                    <a href="/"><?php echo $data['LANGUAGE']; ?></a>
+                    <a href="books?language=<?php echo $data['LANGUAGE']; ?>"><?php echo $data['LANGUAGE']; ?></a>
                 </div>
                 <div class="book-info-item">
                     <p style="padding: 0 8px">|</p>
                     <p>Страниц:</p>
-                    <a href="/"><?php echo $data['PAGES']; ?></a>
+                    <a href="books?pages=<?php echo $data['PAGES']; ?>"><?php echo $data['PAGES']; ?></a>
                 </div>
             </div>
             <div class="book-info-footer"></div>
