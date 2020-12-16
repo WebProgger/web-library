@@ -23,75 +23,13 @@
     </header>
 
     <main class="main-wrapper">
-        <section class="sidebar">
-
-            <input class="checkbox-category" type="checkbox" id="checkbox-category-1">
-            <label for="checkbox-category-1">
-                <div class="sidebar-header">
-                    <span class="category_header"> <i class="fa fa-angle-down"></i> Жанр: </span>
-                </div>
-                <div class="sidebar-content">
-                    <ul class="category ctouch">
-                        <label class="label-category" for="books_category_1">
-                            <li>
-                                <input class="radio" type="radio" id="books_category_1" name="books_category">
-                                <p>1</p>
-                            </li>
-                        </label>
-                        <label class="label-category" for="books_category_2">
-                            <li>
-                                <input class="radio" type="radio" id="books_category_2" name="books_category">
-                                <p>1</p>
-                            </li>
-                        </label>
-                        <label class="label-category" for="books_category_3">
-                            <li>
-                                <input class="radio" type="radio" id="books_category_3" name="books_category">
-                                <p>1</p>
-                            </li>
-                        </label>
-                    </ul>
-                </div>
-            </label>
-
-            <div class="outline"></div>
-
-            <input class="checkbox-category" type="checkbox" id="checkbox-category-2">
-            <label for="checkbox-category-2">
-                <div class="sidebar-header">
-                    <span class="category_header"> <i class="fa fa-angle-down"></i> Жанр: </span>
-                </div>
-                <div class="sidebar-content">
-                    <ul class="category ctouch">
-                        <label class="label-category" for="books_category_1">
-                            <li>
-                                <input class="radio" type="radio" id="books_category_1" name="books_category">
-                                <p>1</p>
-                            </li>
-                        </label>
-                        <label class="label-category" for="books_category_2">
-                            <li>
-                                <input class="radio" type="radio" id="books_category_2" name="books_category">
-                                <p>1</p>
-                            </li>
-                        </label>
-                        <label class="label-category" for="books_category_3">
-                            <li>
-                                <input class="radio" type="radio" id="books_category_3" name="books_category">
-                                <p>1</p>
-                            </li>
-                        </label>
-                    </ul>
-                </div>
-            </label>
-
-        </section>
 
         <section class="content">
             
             <?php echo($data['CONTENT']); ?>
 
         </section>
+        
     </main>
 
     <footer>
@@ -100,7 +38,7 @@
         </section>
     </footer>
 
-    <?php echo $data['BLOCKS']; ?>
+    <?php echo $data['MODALS']; ?>
 
 </body>
 </html>

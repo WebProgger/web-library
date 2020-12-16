@@ -41,6 +41,7 @@ $data_global = array(
     'CONTENT'       => $content,
     'TITLE'         => $core->title,
     'BLOCKS'        => $core->load_def_blocks(),
+    'MODALS'        => $core->load_def_modals(),
     'HEADER'        => $core->header,
     'DEF_HEADER'    => $core->def_header,
     'CFG'           => $core->cfg->main,

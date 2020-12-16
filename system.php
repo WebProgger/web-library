@@ -8,6 +8,7 @@ define('LIB_ENGINE_PATH', LIB_ROOT.'engine/');
 define('LIB_CONFIG_PATH', LIB_ROOT.'configs/');
 define('LIB_MOD_PATH', LIB_ROOT.'modules/');
 define('LIB_BLOCK_PATH', LIB_ROOT.'blocks/');
+define('LIB_MODAL_PATH', LIB_ROOT.'modals/');
 define('LIB_LIBS_PATH', LIB_ENGINE_PATH.'libs/');
 
 if(!session_start()) { session_start(); }

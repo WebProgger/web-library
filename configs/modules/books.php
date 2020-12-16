@@ -6,7 +6,7 @@ $cfg = array(
 	'MOD_DESC'			=> 'Модуль вывода книг',
 	'MOD_AUTHOR'		=> 'Alexsandr Minakov',
 	'MOD_VERSION'		=> '1.0',
-	'MOD_PAGE'			=> false,
+	'MOD_PAGE'			=> true,
 );
 
 ?>

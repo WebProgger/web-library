@@ -10,7 +10,7 @@ class core {
 
     public $db, $cfg, $user = false;
 
-    public $cfg_mod, $cfg_block = array();
+    public $cfg_mod, $cfg_block, $cfg_modal = array();
 
     public $captcha = array(
 
@@ -37,7 +37,8 @@ class core {
         define('LIB_THEME_JS_PATH', LIB_THEME_PATH.'js/');
         define('LIB_THEME_IMG_PATH', LIB_THEME_PATH.'img/');
         define('LIB_THEME_MOD_PATH', LIB_THEME_PATH.'modules/');
-        define('LIB_THEME_BLOCK_PATH', LIB_THEME_PATH.'blocks/');
+		define('LIB_THEME_BLOCK_PATH', LIB_THEME_PATH.'blocks/');
+		define('LIB_THEME_MODAL_PATH', LIB_THEME_PATH.'modals/');
         define('LIB_BASE_URL', $base_url);
         define('LIB_THEME_URL', LIB_BASE_URL.'themes/'.$this->cfg->main['s_theme'].'/');
         define('LIB_THEME_CSS_URL', LIB_THEME_URL.'css/');
@@ -80,13 +81,13 @@ class core {
 			'MOD_DESC',
 			'MOD_AUTHOR',
             'MOD_VERSION',
-            'MOD_PAGE',
+            'MOD_PAGE'
 		);
 
 		$result = true;
 
 		foreach($validator as $key => $val){
-			if(!isset($cfg[$val])){ $result = false; }
+			if(!isset($cfg[$val])) { $result = false; }
 		}
 
         return $result;
@@ -100,7 +101,7 @@ class core {
 			'POSITION',
 			'TITLE',
 			'DESC',
-			'AUTHOR',
+			'AUTHOR'
 		);
 
 		$result = true;
@@ -114,6 +115,25 @@ class core {
         return $result;
         
 	}
+
+	public function check_cfg_modal($cfg){
+
+		$validator = array(
+			'ENABLE',
+			'TITLE',
+			'DESC',
+			'AUTHOR'
+		);
+
+		$result = true;
+
+		foreach($validator as $key => $val){
+			if(!isset($cfg[$val])) { $result = false; }
+		}
+
+        return $result;
+        
+    }
     
     public function check_theme_page($mod) {
 
@@ -200,7 +220,7 @@ class core {
 
 		foreach($configs as $key => $file) {
 
-			$this->cfg_b = $cfg = false;
+			$this->cfg_block = $cfg = false;
 
 			if($file=='.' || $file=='..' || substr($file, -4)!='.php'){ continue; }
 
@@ -237,6 +257,65 @@ class core {
 		ksort($blocks);
 
 		foreach($blocks as $key => $val) {
+
+            $content .= $val;
+            
+		}
+
+        return $content;
+        
+	}
+
+	public function load_def_modals() {
+
+		$format = array('ENABLE', 'TITLE', 'DESC', 'AUTHOR');
+
+		$configs = scandir(LIB_CONFIG_PATH.'modals');
+
+		if(empty($configs)) { return false; }
+
+		$content = '';
+		$modals = array();
+
+		foreach($configs as $key => $file) {
+
+			$this->cfg_modal = $cfg = false;
+
+			if($file=='.' || $file=='..' || substr($file, -4)!='.php'){ continue; }
+
+			include(LIB_CONFIG_PATH.'modals/'.$file);
+
+			if($cfg === false) { continue; }
+
+			$cfg_keys = array_keys($cfg);
+
+			$diff = array_diff($format, $cfg_keys);
+
+			if(!empty($diff) || !$cfg['ENABLE']) { continue; }
+
+			if(!file_exists(LIB_MODAL_PATH.$file)) { continue; }
+
+            include(LIB_MODAL_PATH.$file);
+            
+            $this->cfg_modal = $cfg;
+
+			$classname = 'modal_'.substr($file, 0, -4);
+
+			if(!class_exists($classname)){ continue; }
+
+			$obj = new $classname($this);
+
+			if(!method_exists($obj, 'content')){ unset($obj); continue; }
+
+			$modals[0] = $obj->content();
+
+            unset($obj);
+            
+		}
+
+		ksort($modals);
+
+		foreach($modals as $key => $val) {
 
             $content .= $val;
             

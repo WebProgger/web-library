@@ -2,7 +2,7 @@
 
 if(!defined("LIB")) { exit("Hacking Attempt!"); }
 
-class block_notify {
+class modal_notify {
 
 	private $core, $db;
 
@@ -15,7 +15,7 @@ class block_notify {
 
 	public function content() {
 
-		$this->core->header .= $this->core->sp(LIB_THEME_BLOCK_PATH."notify/header.html");
+		$this->core->header .= $this->core->sp(LIB_THEME_MODAL_PATH."notify/header.html");
 
 		if(!isset($_SESSION['lib_notify'])){ return; }
 
@@ -25,7 +25,7 @@ class block_notify {
 			"MESSAGE" => $this->db->HSC(@$_SESSION['notify_msg'])
 		);
 
-		$result = $this->core->sp(LIB_THEME_BLOCK_PATH."notify/alert.html", $new_data);
+		$result = $this->core->sp(LIB_THEME_MODAL_PATH."notify/alert.html", $new_data);
 	
 		unset($_SESSION['lib_notify']);
 		unset($_SESSION['notify_type']);
