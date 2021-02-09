@@ -1,19 +1,102 @@
-<form method="POST">
+<form class="form-add" method="POST" enctype="multipart/form-data">
 
-    <input type="text" name="name">
+    <div class="form-add-header">
+        <span class="form-add-title">
+            Добавление книг
+        </span>
+    </div>
 
-    <input type="text" name="description">
+    <div class="form-add-body">
 
-    <input type="text" name="author">
+        <div class="form-add-item">
+            <label class="form-add-label" for="name">Название:</label>
+            <input class="form-add-input" type="text" id="name" name="name">
+        </div>
 
-    <input type="text" name="genre">
+        <div class="form-add-item">
+            <label class="form-add-label" for="description">Описание:</label>
+            <input class="form-add-input" type="text" id="description" name="description">
+        </div>
 
-    <input type="number" name="count">
+        <div class="form-add-item">
+            <label class="form-add-label" for="author">Автор:</label>
+            <input class="form-add-input" type="text" id="author" name="author">
+        </div>
 
-    <input type="file" name="src">
+        <div class="form-add-item">
+            <label class="form-add-label" for="genre">Жанр:</label>
+            <select class="form-add-select" id="genre" name="genre">
+                <?php echo $data['GENRES']; ?>
+            </select>
+        </div>
 
-    <input type="text" name="uuid">
+        <div class="form-add-item">
+            <label class="form-add-label" for="year">Год печати:</label>
+            <input class="form-add-input" type="number" id="year" name="year">
+        </div>
 
-    <button type="submit">Добавить</button>
+        <div class="form-add-item">
+            <label class="form-add-label" for="language">Язык:</label>
+            <select class="form-add-select" id="language" name="language">
+                <?php echo $data['LANGUAGES']; ?>
+            </select>
+        </div>
+
+        <div class="form-add-item">
+            <label class="form-add-label" for="pages">Количество страниц:</label>
+            <input class="form-add-input" type="number" id="pages" name="pages" value="0">
+        </div>
+
+        <div class="form-add-item">
+            <label class="form-add-label" for="publisher">Издатель:</label>
+            <input class="form-add-input" type="text" id="publisher" name="publisher">
+        </div>
+
+        <div class="form-add-item">
+            <label class="form-add-label" for="city_print">Город печати:</label>
+            <input class="form-add-input" type="text" id="city_print" name="city_print">
+        </div>
+
+        <div class="form-add-item">
+            <label class="form-add-label" for="uuid">Уникальный идентификатор:</label>
+            <input class="form-add-input" type="text" id="uuid" name="uuid">
+        </div>
+
+        <div class="form-add-item">
+            <label class="form-add-label" for="type">Тип издания:</label>
+            <div class="double-columns">
+                <div class="form-add-block-checkbox">
+                    <input class="form-add-checkbox" type="checkbox" id="type_1" name="type">
+                    <label id="btn_1" class="for-checkbox" for="type_1">Печатное издание</label>
+                </div>
+                <div class="form-add-block-checkbox">
+                    <input class="form-add-checkbox" type="checkbox" id="type_2" name="type">
+                    <label id="btn_2" class="for-checkbox" for="type_2">Электронное издание</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-add-item">
+            <label class="form-add-label" for="cover">Обложка книги:</label>
+            <input class="form-add-file" type="file" id="cover" name="cover">
+        </div>
+
+        <div class="form-add-item form-add-type1-change hidden">
+            <label class="form-add-label" for="count">Количество печатных изданий (если электронное издание, оставить 0):</label>
+            <input class="form-add-input" type="number" id="count" name="count" value="0">
+        </div>
+
+        <div class="form-add-item form-add-type2-change hidden">
+            <label class="form-add-label" for="electronic_src">Файл электронного издания:</label>
+            <input class="form-add-file" type="file" id="electronic_src" name="electronic_src">
+        </div>
+
+    </div>
+
+    <div class="form-add-footer">
+        <button class="form-add-btn">Добавить</button>
+    </div>
+
+    <script src="<?php echo LIB_THEME_JS_URL ?>global.js"></script>
 
 </form>

@@ -4,7 +4,9 @@ if(!defined('LIB')) { exit('Hacking Attempt!'); }
 
 class core {
 
-    public $title, $header, $menu;
+	public $title, $header, $menu;
+
+	public $page_title;
 
     public $def_header = '';
 
@@ -396,6 +398,60 @@ class core {
 		}
 
 		return false;
+
+	}
+
+	public function upload_image($dir='',$field) {
+
+		// path - название папки в uploads
+		// field - название поля в форме
+
+		$path = $_SERVER['DOCUMENT_ROOT'].'/uploads/'.$dir.'/';
+
+		if(!is_uploaded_file ($_FILES[$field]['tmp_name'])) { return false; }
+
+		$mw = 1920; // Максимальная ширина
+		$mh = 1080; // Максимальная высота
+
+		list($width, $height, $type, $attr) = getimagesize($_FILES[$field]['tmp_name']); // Получение информации об изображении
+
+		if($width < 50 || $width > $mw) {
+			$error = 1;
+			$this->core->notify("Ошибка!", "По ширине картинка должна быть не меньше 50px и не больше $mw", 2);
+			return false;
+		} else if($height < 50 || $height > $mh) {
+			$error = 1;
+	    	$this->core->notify("Ошибка!", "По высоте картинка должна быть не меньше 50px и не больше $mh ", 2);
+	    	return false;
+		}
+
+		if(!isset($error)) {
+			do {
+				$image_name = uniqid().'.png';
+			} while(file_exists($path.$image_name));
+			move_uploaded_file($_FILES[$field]['tmp_name'], $path.$image_name);
+
+			return '/uploads/'.$dir.'/'.$image_name;
+		}
+
+	}
+
+	public function upload_file($dir='',$field) {
+
+		// path - название папки в uploads
+		// field - название поля в форме
+
+		$path = $_SERVER['DOCUMENT_ROOT'].'/uploads/'.$dir.'/';
+
+		if(!is_uploaded_file($_FILES[$field]['tmp_name'])) { return false; }
+
+		$file_extension = end(explode(".", $_FILES[$field]['tmp_name']));
+
+		$file_name = uniqid().'.'.$file_extension;
+
+		move_uploaded_file($_FILES[$field]['tmp_name'], $path.$file_name);
+
+		return '/uploads/'.$dir.'/'.$file_name;
 
 	}
 

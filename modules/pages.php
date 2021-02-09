@@ -22,6 +22,16 @@ class module {
 		$page = $page_ar[1];
 
 		if($page == '' || $page == 'index') { $page = 'main_page'; }
+
+		switch($page) {
+			case "main_page":
+				$this->core->page_title = "Главная";
+			break;
+
+			default:
+				$this->core->page_title = "Страница";
+			break;
+		}
 		
 		return $this->core->sp(LIB_THEME_PATH.'modules/pages/'.$page.'.html');
 

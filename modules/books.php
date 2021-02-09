@@ -10,11 +10,12 @@ class module {
 		$this->core		= $core;
 		$this->db		= $core->db;
 		$this->cfg		= $core->cfg;
-		$this->user		= $core->user;
+        $this->user		= $core->user;
 
-		$this->core->header = $this->core->sp(LIB_THEME_PATH.'modules/books/header.html');
+        $this->core->page_title = "Книги";
 
-		
+        $this->core->header = $this->core->sp(LIB_THEME_PATH.'modules/books/header.html');
+        
     }
     
     private function books_search() {
@@ -47,11 +48,19 @@ class module {
 
         }
 
-        $query = $this->db->query("SELECT `books`.`idbook`, `books`.`name`, `books`.`description`, `books`.`author`, `genres`.`name`, `books`.`year`,
-            `languages`.`name`, `books`.`pages`, `books`.`publisher`, `books`.`city_print`, `books`.`count`, `books`.`electronic_src`, `books`.`cover`, `books`.`uuid`
-            FROM `books`, `genres`, `languages` WHERE `books`.`idgenre` = `genres`.`idgenre` AND `books`.`idlanguage` = `languages`.`idlanguage` AND `books`.`$par` = '$val'");
+        if(!empty($_GET['idgenre'])) {
 
-            
+            $query = $this->db->query("SELECT `books`.`idbook`, `books`.`name`, `books`.`description`, `books`.`author`, `genres`.`name`, `books`.`year`,
+                `languages`.`name`, `books`.`pages`, `books`.`publisher`, `books`.`city_print`, `books`.`count`, `books`.`electronic_src`, `books`.`cover`, `books`.`uuid`
+                FROM `books`, `genres`, `languages` WHERE `books`.`idgenre` = `genres`.`idgenre` AND `books`.`idlanguage` = `languages`.`idlanguage` AND `genres`.`$par` = '$val'");
+
+        } else {
+
+            $query = $this->db->query("SELECT `books`.`idbook`, `books`.`name`, `books`.`description`, `books`.`author`, `genres`.`name`, `books`.`year`,
+                `languages`.`name`, `books`.`pages`, `books`.`publisher`, `books`.`city_print`, `books`.`count`, `books`.`electronic_src`, `books`.`cover`, `books`.`uuid`
+                FROM `books`, `genres`, `languages` WHERE `books`.`idgenre` = `genres`.`idgenre` AND `books`.`idlanguage` = `languages`.`idlanguage` AND `books`.`$par` = '$val'");
+
+        }
 
         if(!$query || $this->db->num_rows($query) <= 0) { return $this->core->sp(LIB_THEME_PATH.'modules/books/book-none.html'); }
 

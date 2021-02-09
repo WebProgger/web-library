@@ -22,18 +22,26 @@
         </nav>
     </header>
 
-    <main class="main-wrapper">
-        <section class="sidebar">
+    <main class="content">
 
-            <?php echo($data['BLOCKS']); ?>    
+        <div class="wrapper">
 
-        </section>
+            <div class="blocks">
 
-        <section class="content">
-            
-            <?php echo($data['CONTENT']); ?>
+                <section class="sidebar"> <?php echo($data['BLOCKS']); ?> </section>
 
-        </section>
+                <section class="page">
+
+                    <div class="page-header"> <?php echo($data['PAGE_TITLE']); ?> </div>
+        
+                    <div class="page-content"> <?php echo($data['CONTENT']); ?> </div>
+        
+                </section>
+
+            </div>
+
+        </div>
+        
     </main>
 
     <footer>

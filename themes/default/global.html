@@ -22,13 +22,23 @@
         </nav>
     </header>
 
-    <main class="main-wrapper">
+    <main class="content">
 
-        <section class="content">
-            
-            <?php echo($data['CONTENT']); ?>
+        <div class="wrapper">
 
-        </section>
+            <div class="blocks">
+
+                <section class="page">
+
+                    <div class="page-header"> <?php echo($data['PAGE_TITLE']); ?> </div>
+        
+                    <div class="page-content"> <?php echo($data['CONTENT']); ?> </div>
+        
+                </section>
+
+            </div>
+
+        </div>
         
     </main>
 

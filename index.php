@@ -39,6 +39,7 @@ switch($page) {
 
 $data_global = array(
     'CONTENT'       => $content,
+    'PAGE_TITLE'    => $core->page_title,
     'TITLE'         => $core->title,
     'BLOCKS'        => $core->load_def_blocks(),
     'MODALS'        => $core->load_def_modals(),

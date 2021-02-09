@@ -12,6 +12,8 @@ class module {
 		$this->db		= $core->db;
 		$this->cfg		= $core->cfg;
 		$this->user		= $core->user;
+
+		$this->core->page_title = "Панель управления";
         
 	}
 
