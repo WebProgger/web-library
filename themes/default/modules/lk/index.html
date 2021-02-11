@@ -1,0 +1,42 @@
+<div class="lk-container">
+    <div class="lk-block">
+        <div class="lk-profile">
+            <div class="lk-profile-photo">
+                <img src="/uploads/users/standart.png">
+            </div>
+            <div class="lk-rows">
+                <div class="lk-row">
+                    <label>Email</label>
+                    <span><?php echo($data['MAIL']); ?></span>
+                </div>
+                <div class="lk-row">
+                    <label>ФИО</label>
+                    <span><?php echo($data['FIO']); ?></span>
+                </div>
+                <div class="lk-row">
+                    <label>Права доступа</label>
+                    <span><?php echo($data['ROLE']); ?></span>
+                </div>
+                <div class="lk-row">
+                    <button type="submit" class="lk-btn">Редактировать</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="lk-block">
+        <div class="lk-row">
+            <label class="grid-title">Избранное</label>
+            <div class="lk-grid">
+                <?php echo($data['FAVORITES']); ?>
+            </div>
+        </div>
+
+        <div class="lk-row">
+            <label class="grid-title">Ранее читали</label>
+            <div class="lk-grid">
+
+            </div>
+        </div>
+        
+    </div>
+</div>

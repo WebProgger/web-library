@@ -11,7 +11,9 @@ class user {
     public $surname = '';
     public $name = '';
     public $middle_name = '';
+    public $full_name = '';
     public $idrole = 0;
+    public $role_name = '';
     public $is_auth = false;
     public $auth;
 
@@ -36,7 +38,7 @@ class user {
         $c_token = $cookie[1];
 
         $query = $this->db->query("SELECT `users`.`iduser`, `users`.`surname`, `users`.`name`, `users`.`middle_name`, `users`.`idrole`, `users`.`mail`, 
-        `users`.`password`, `users`.`token`, `roles`.`permissions`
+        `users`.`password`, `users`.`token`, `roles`.`permissions`, `roles`.`name` AS rolename
         FROM `users`, `roles` WHERE `roles`.`idrole` = `users`.`idrole` AND `users`.`iduser` = $c_id");
 
         if(!$query || $this->db->num_rows($query) <= 0) { $this->set_unauth(); $this->core->notify(); }
@@ -57,7 +59,10 @@ class user {
         $this->surname     = $this->db->HSC($ar['surname']);
         $this->name        = $this->db->HSC($ar['name']);
         $this->middle_name = $this->db->HSC($ar['middle_name']);
+        $this->full_name   = $this->surname . " " . $this->name . " " . $this->middle_name;
+
         $this->idrole      = intval($ar['idrole']);
+        $this->role_name   = $this->db->HSC($ar['rolename']);
 
         $this->is_auth     = true;
 

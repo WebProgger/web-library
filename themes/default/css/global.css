@@ -27,6 +27,7 @@ nav {
 }
 
 .menu {
+    padding-top: 15px;
     margin: 0;
     height: 13vh;
     display: flex;

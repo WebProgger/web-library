@@ -16,7 +16,7 @@ else {
 
     $page = $page_arr[0];
 
-    if(!preg_match('/^[A-z0-9]{3,15}$/', $page)) { exit('error url'); } 
+    if(!preg_match('/^[A-z0-9]{2,15}$/', $page)) { exit('error url'); } 
 
     }
 
