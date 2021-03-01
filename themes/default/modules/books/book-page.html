@@ -1,0 +1,63 @@
+<div class="book-case book-page">
+    <div class="book-content">
+        <div class="book-img">
+            <img width="256" height="374" src="<?php echo $data['COVER']; ?>">
+        </div>
+        <div class="book-info">
+            <div class="book-title">
+                <div class="book-info-title">
+                    <p><?php echo $data['NAME']; ?></p>
+                </div>
+                <?php echo $data['FAVORITE']; ?>
+            </div>
+            <div class="book-info-content">
+                <div class="right-side">
+                    <div class="book-info-item">
+                        <p>Автор:</p>
+                        <a href="books?author=<?php echo $data['AUTHOR']; ?>"><?php echo $data['AUTHOR']; ?></a>
+                    </div>
+                    <div class="book-info-item">
+                        <p>Жанр:</p>
+                        <a href="books?genre=<?php echo $data['GENRE']; ?>"><?php echo $data['GENRE']; ?></a>
+                    </div>
+                    <div class="book-info-item">
+                        <p>Год:</p>
+                        <a href="books?year=<?php echo $data['YEAR']; ?>"><?php echo $data['YEAR']; ?></a>
+                    </div>
+                    <div class="book-info-item">
+                        <p>Язык:</p>
+                        <a href="books?language=<?php echo $data['LANGUAGE']; ?>"><?php echo $data['LANGUAGE']; ?></a>
+                    </div>
+                    <div class="book-info-item">
+                        <p>Количество страниц:</p>
+                        <a href="books?pages=<?php echo $data['PAGES']; ?>"><?php echo $data['PAGES']; ?></a>
+                    </div>
+                </div>
+                <div class="left-side">
+                    <div class="book-info-item">
+                        <p>Издатель:</p>
+                        <p><?php echo $data['PUBLISHER']; ?></p>
+                    </div>
+                    <div class="book-info-item">
+                        <p>Город печати:</p>
+                        <p><?php echo $data['CITY_PRINT']; ?></p>
+                    </div>
+                    <div class="book-info-item">
+                        <p>Количество печатных изданий:</p>
+                        <p><?php echo $data['COUNT']; ?></p>
+                    </div>
+                    <div class="book-info-item">
+                        <p>Уникальный идентификатор:</p>
+                        <p><?php echo $data['UUID']; ?></p>
+                    </div>
+                </div>
+            </div>
+            <div class="book-info-footer">
+                <a class="book-btn" href="<?php echo $data['ELECTRONIC_SRC']; ?>">Читать</a>
+            </div>
+        </div>
+    </div>
+    <div class="book-footer">
+        <p><?php echo $data['DESC']; ?></p>
+    </div>
+</div>

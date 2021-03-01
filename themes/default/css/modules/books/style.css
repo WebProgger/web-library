@@ -3,6 +3,10 @@
     border-bottom: 1px solid gray;
 }
 
+.book-page {
+    border-bottom: none;
+}
+
 .book-content {
     display: flex;
 }
@@ -11,11 +15,22 @@
     padding: 10px 20px;
 }
 
+.book-title {
+    display: flex;
+}
+
 .book-info-title {
     padding-bottom: 50px;
 }
 
 .book-info-title a {
+    font-size: 24px;
+    text-decoration: none;
+    color: black;
+    border-bottom: 1px solid rgba(128,128,128,0.3);
+}
+
+.book-info-title p {
     font-size: 24px;
     text-decoration: none;
     color: black;
@@ -40,6 +55,45 @@
     font-size: 18px;
     text-decoration: none;
     color: black;
+    margin-left: 5px;
+    border-bottom: 1px solid rgba(128,128,128,0.3);
+}
+
+.book-info-item p {
+    font-size: 18px;
+    text-decoration: none;
+    color: black;
+    margin-left: 5px;
+    border-bottom: 1px solid rgba(128,128,128,0.3);
+}
+
+.book-info-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.book-info-content .right-side {
+    
+}
+
+.book-info-content .left-side {
+    margin-left: 40px;
+}
+
+.book-page .book-info-item a {
+    font-size: 12px;
+    text-decoration: none;
+    color: black;
+    margin-left: 5px;
+    border-bottom: 1px solid rgba(128,128,128,0.3);
+}
+
+.book-page .book-info-item p {
+    font-size: 12px;
+    text-decoration: none;
+    color: #666;
     margin-left: 5px;
     border-bottom: 1px solid rgba(128,128,128,0.3);
 }
@@ -80,4 +134,10 @@
     color: gray;
     font-size: 14px;
     text-indent: 25px;
+}
+
+#favorite {
+    margin-left: 100%;
+    font-size: 32px;
+    color: gold;
 }

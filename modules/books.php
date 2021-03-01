@@ -17,6 +17,81 @@ class module {
         $this->core->header = $this->core->sp(LIB_THEME_PATH.'modules/books/header.html');
         
     }
+
+    private function getFavorite($idbook, $iduser) {
+
+        $nFound = [
+            'ID'    => $idbook,
+            'CLASS' => 'fa-star-o'
+        ];
+
+        $Found = [
+            'ID'    => $idbook,
+            'CLASS' => 'fa-star'
+        ];
+
+        if(!$this->user->is_auth) { return false; }
+        
+        $check = $this->db->query("SELECT `idfavorite` FROM `favorites` WHERE `idbook` = $idbook AND `iduser` = $iduser");
+
+        if(!$check || $this->db->num_rows($check) < 1) { return $this->core->sp(LIB_THEME_PATH.'modules/books/favorite.html', $nFound); }
+
+        return $this->core->sp(LIB_THEME_PATH.'modules/books/favorite.html', $Found);
+    }
+
+    private function getBook($id) {
+
+        $query = $this->db->query("SELECT `books`.`idbook`, `books`.`name`, `books`.`description`, `books`.`author`, `genres`.`name`, `books`.`year`,
+            `languages`.`name`, `books`.`pages`, `books`.`publisher`, `books`.`city_print`, `books`.`count`, `books`.`electronic_src`, `books`.`cover`, `books`.`uuid` 
+            FROM `books`, `genres`, `languages` WHERE `books`.`idgenre` = `genres`.`idgenre` AND `books`.`idlanguage` = `languages`.`idlanguage` AND `books`.`idbook` = $id LIMIT 1");
+
+        if(!$query || $this->db->num_rows($query) <= 0) { return $this->core->sp(LIB_THEME_PATH.'modules/books/book-none.html'); }
+
+        $array = array();
+
+        $i = 0;
+
+        while($book = $this->db->fetch_array($query)) {
+
+            $data = [
+                'ID'            => $book[0],
+                'NAME'          => $book[1],
+                'DESC'          => $book[2],
+                'AUTHOR'        => $book[3],
+                'GENRE'         => $book[4],
+                'YEAR'          => $book[5],
+                'LANGUAGE'      => $book[6],
+                'PAGES'         => $book[7],
+                'PUBLISHER'     => $book[8],
+                'CITY_PRINT'    => $book[9],
+                'COUNT'         => $book[10],
+                'ELECTRONIC_SRC'=> $book[11],
+                'COVER'         => $book[12],
+                'UUID'          => $book[13],
+                'FAVORITE'      => ''
+            ];
+
+            $array[$i] = $data;
+
+            $i += 1;
+
+        }
+
+        ob_start();
+
+        for($i = 0; $i < count($array); $i++) {
+
+            $array[$i]['FAVORITE'] = $this->getFavorite(intval($array[$i]['ID']), $this->user->iduser);
+
+            $data = $array[$i];
+
+            echo $this->core->sp(LIB_THEME_PATH.'modules/books/book-page.html', $data);
+
+        }
+
+        return ob_get_clean();
+
+    }
     
     private function books_search() {
 
@@ -64,30 +139,45 @@ class module {
 
         if(!$query || $this->db->num_rows($query) <= 0) { return $this->core->sp(LIB_THEME_PATH.'modules/books/book-none.html'); }
 
-        ob_start();
-
         $count = $this->db->num_rows($query);
+
+        $array = array();
+
+        $i = 0;
 
         while($book = $this->db->fetch_array($query)) {
 
             $data = [
-                'ID' => $book[0],
-                'NAME' => $book[1],
-                'DESC' => $book[2],
-                'AUTHOR' => $book[3],
-                'GENRE' => $book[4],
-                'YEAR' => $book[5],
-                'LANGUAGE' => $book[6],
-                'PAGES' => $book[7],
-                'PUBLISHER' => $book[8],
-                'CITY_PRINT' => $book[9],
-                'COUNT' => $book[10],
-                'ELECTRONIC_SRC' => $book[11],
-                'COVER' => $book[12],
-                'UUID' => $book[13]
+                'ID'            => $book[0],
+                'NAME'          => $book[1],
+                'DESC'          => $book[2],
+                'AUTHOR'        => $book[3],
+                'GENRE'         => $book[4],
+                'YEAR'          => $book[5],
+                'LANGUAGE'      => $book[6],
+                'PAGES'         => $book[7],
+                'PUBLISHER'     => $book[8],
+                'CITY_PRINT'    => $book[9],
+                'COUNT'         => $book[10],
+                'ELECTRONIC_SRC'=> $book[11],
+                'COVER'         => $book[12],
+                'UUID'          => $book[13],
+                'FAVORITE'      => ''
             ];
 
-            
+            $array[$i] = $data;
+
+            $i += 1;
+
+        }
+
+        ob_start();
+
+        for($i = 0; $i < count($array); $i++) {
+
+            $array[$i]['FAVORITE'] = $this->getFavorite(intval($array[$i]['ID']), $this->user->iduser);
+
+            $data = $array[$i];
 
             echo $this->core->sp(LIB_THEME_PATH.'modules/books/book-id.html', $data);
 
@@ -101,7 +191,7 @@ class module {
         return $this->core->sp(LIB_THEME_PATH.'modules/books/book-search.html', $data);
         
     }
-
+    
 	private function books_list() {
 
         $query = $this->db->query("SELECT `books`.`idbook`, `books`.`name`, `books`.`description`, `books`.`author`, `genres`.`name`, `books`.`year`,
@@ -110,28 +200,43 @@ class module {
 
         if(!$query || $this->db->num_rows($query) <= 0) { return $this->core->sp(LIB_THEME_PATH.'modules/books/book-none.html'); }
 
-        ob_start();
+        $array = array();
+
+        $i = 0;
 
         while($book = $this->db->fetch_array($query)) {
 
             $data = [
-                'ID' => $book[0],
-                'NAME' => $book[1],
-                'DESC' => $book[2],
-                'AUTHOR' => $book[3],
-                'GENRE' => $book[4],
-                'YEAR' => $book[5],
-                'LANGUAGE' => $book[6],
-                'PAGES' => $book[7],
-                'PUBLISHER' => $book[8],
-                'CITY_PRINT' => $book[9],
-                'COUNT' => $book[10],
-                'ELECTRONIC_SRC' => $book[11],
-                'COVER' => $book[12],
-                'UUID' => $book[13]
+                'ID'            => $book[0],
+                'NAME'          => $book[1],
+                'DESC'          => $book[2],
+                'AUTHOR'        => $book[3],
+                'GENRE'         => $book[4],
+                'YEAR'          => $book[5],
+                'LANGUAGE'      => $book[6],
+                'PAGES'         => $book[7],
+                'PUBLISHER'     => $book[8],
+                'CITY_PRINT'    => $book[9],
+                'COUNT'         => $book[10],
+                'ELECTRONIC_SRC'=> $book[11],
+                'COVER'         => $book[12],
+                'UUID'          => $book[13],
+                'FAVORITE'      => ''
             ];
 
-            
+            $array[$i] = $data;
+
+            $i += 1;
+
+        }
+
+        ob_start();
+
+        for($i = 0; $i < count($array); $i++) {
+
+            $array[$i]['FAVORITE'] = $this->getFavorite(intval($array[$i]['ID']), $this->user->iduser);
+
+            $data = $array[$i];
 
             echo $this->core->sp(LIB_THEME_PATH.'modules/books/book-id.html', $data);
 
@@ -143,11 +248,11 @@ class module {
 
 	public function content() {
 
+        if($_GET['id'] && !empty($_GET['id'])) { return $this->getBook(intval($_GET['id'])); }
+
         if(count($_GET) > 0) { return $this->books_search(); }
 
-        else { return $this->books_list(); }
-
-        
+        else { return $this->books_list(); }   
 
     }
     

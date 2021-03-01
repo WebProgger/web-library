@@ -18,10 +18,10 @@ class module {
     
     private function load_favorites() {
 
-		$query = $this->db->query("SELECT `books`.`cover`, `books`.`name` FROM `books`, `favorites` 
+		$query = $this->db->query("SELECT `books`.`idbook`, `books`.`cover`, `books`.`name` FROM `books`, `favorites` 
 			WHERE `books`.`idbook` = `favorites`.`idbook` AND `favorites`.`iduser` = ".$this->user->iduser."");
 
-		if(!$query || $this->db->num_rows($query) <= 0) { $this->core->notify('Ошибка!', 'Невозможно загрузить избранное!', 2); }
+		if(!$query) { $this->core->notify('Ошибка!', 'Невозможно загрузить избранное!', 2); }
 
 		ob_start();
 
@@ -37,6 +37,7 @@ class module {
 			}
 
 			$data = [
+				'ID'	     => intval($ar['idbook']),
 				'BOOK_COVER' => $this->db->HSC($ar['cover']),
 				'BOOK_NAME'	 => $book_name
 			];

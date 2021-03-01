@@ -4,10 +4,12 @@
             <img width="256" height="374" src="<?php echo $data['COVER']; ?>">
         </div>
         <div class="book-info">
-            <div class="book-info-title">
-                <a href="books?name=<?php echo $data['NAME']; ?>"><?php echo $data['NAME']; ?></a>
+            <div class="book-title">
+                <div class="book-info-title">
+                    <a href="books?id=<?php echo $data['ID']; ?>"><?php echo $data['NAME']; ?></a>
+                </div>
+                <?php echo $data['FAVORITE']; ?>
             </div>
-        
             <div class="book-info-item">
                 <p>Автор:</p>
                 <a href="books?author=<?php echo $data['AUTHOR']; ?>"><?php echo $data['AUTHOR']; ?></a>
@@ -32,8 +34,9 @@
                     <a href="books?pages=<?php echo $data['PAGES']; ?>"><?php echo $data['PAGES']; ?></a>
                 </div>
             </div>
-            <div class="book-info-footer"></div>
-            <a class="book-btn" href="<?php echo $data['ELECTRONIC_SRC']; ?>">Читать</a>
+            <div class="book-info-footer">
+                <a class="book-btn" href="<?php echo $data['ELECTRONIC_SRC']; ?>">Читать</a>
+            </div>
         </div>
     </div>
     <div class="book-footer">
