@@ -1,0 +1,35 @@
+<div class="rented-block">
+    <div class="rented-container" id="pdf">
+        <div class="side">
+            <img src="/themes/default/img/favicon.ico" height="130px">
+        </div>
+        <div class="side">
+            <div class="item">
+                <span>Номер аренды</span>
+                <p><?php echo $data['ID']; ?></p>
+            </div>
+            <div class="item">
+                <span>Название книги</span>
+                <p><?php echo $data['NAME']; ?></p>
+            </div>
+            <div class="item">
+                <span>Уникальный идентификатор</span>
+                <p><?php echo $data['UUID']; ?></p>
+            </div>
+        </div>
+        <div class="side">
+            <div class="item">
+                <span>Дата выдачи</span>
+                <p><?php echo $data['DATE_CAPTURE']; ?></p>
+            </div>
+            <div class="item">
+                <span>Дата возврата</span>
+                <p><?php echo $data['DATE_RETURN']; ?></p>
+            </div>
+            <div class="item">
+                <span>Статус</span>
+                <p><?php echo $data['STATUS']; ?></p>
+            </div>
+        </div>
+    </div>
+</div>

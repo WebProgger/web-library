@@ -14,7 +14,6 @@ class module {
 
 		$this->core->header = $this->core->sp(LIB_THEME_PATH.'modules/auth/header.html');
 
-		
 	}
 
 	private function auth() {
@@ -45,7 +44,7 @@ class module {
 
 		$create_cookie = $iduser."_".$new_token;
 
-		$safetime = time()+3600;
+		$safetime = time()+3600*24*7;
 
 		setcookie("lib_user", $create_cookie, $safetime, '/');
 

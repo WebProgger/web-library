@@ -18,7 +18,7 @@ class submodule {
 
 	private function get_items_array() {
 
-		$query = $this->db->query("SELECT `idmenu`, `title`, `url`, `permissions`, `idgroup` FROM `menu_admin`");
+		$query = $this->db->query("SELECT `idmenu`, `title`, `url`, `permissions`, `idgroup`, `icon` FROM `menu_admin`");
 
 		if(!$query || $this->db->num_rows($query)<=0) { return array(); }
 
@@ -33,7 +33,8 @@ class submodule {
 				"title" => $ar['title'],
                 "url" => $ar['url'],
                 "permissions" => $ar['permissions'],
-                "group" => $ar['idgroup']
+                "group" => $ar['idgroup'],
+				"icon" => $ar['icon']
             );
             
             if(!isset($items[$group])){
@@ -60,6 +61,7 @@ class submodule {
                 "URL" => $this->db->HSC($ar['url']),
                 "PERMISSIONS" => $this->db->HSC($ar['permissions']),
                 "GROUP" => $this->db->HSC($ar['group']),
+				"ICON" => $this->db->HSC($ar['icon']),
 			);
 
 			echo $this->core->sp(LIB_THEME_MOD_PATH."admin/panel_menu/menu-items/item-id.html", $data);

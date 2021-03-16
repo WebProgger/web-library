@@ -18,6 +18,52 @@ class module {
         
     }
 
+    private function getRead($idbook) {
+
+        $query = $this->db->query("SELECT `electronic_src` FROM `books` WHERE `idbook` = $idbook");
+
+        if(!$query || $this->db->num_rows($query) < 1) { return; }
+
+        $ar     = $this->db->fetch_assoc($query);
+        $url    = $this->db->HSC($ar['electronic_src']);
+
+        if($url === '') {
+            return;
+        }
+
+        $data = [
+            'URL' => $url
+        ];
+
+        return $this->core->sp(LIB_THEME_MOD_PATH.'books/read.html', $data);
+
+    }
+
+    private function getRent($idbook) {
+
+        if(!$this->user->is_auth) { return; }
+
+        $query = $this->db->query("SELECT `idbook`, `count`, `uuid` FROM `books` WHERE `idbook` = $idbook LIMIT 1");
+
+        if(!$query || $this->db->num_rows($query) < 1) { return; }
+
+        $ar     = $this->db->fetch_assoc($query);
+
+        $id     = intval($ar['idbook']);
+        $count  = intval($ar['count']);
+        $uuid   = $this->db->HSC($ar['uuid']);
+
+        if($count < 1) { return; }
+
+        $data = [
+            'ID'    => $id,
+            'UUID'  => $uuid
+        ];
+
+        return $this->core->sp(LIB_THEME_PATH.'modules/books/rent.html', $data);
+
+    }
+
     private function getFavorite($idbook, $iduser) {
 
         $nFound = [
@@ -68,12 +114,16 @@ class module {
                 'ELECTRONIC_SRC'=> $book[11],
                 'COVER'         => $book[12],
                 'UUID'          => $book[13],
-                'FAVORITE'      => ''
+                'FAVORITE'      => '',
+                'RENT'          => '',
+                'READ'          => ''
             ];
 
             $array[$i] = $data;
 
             $i += 1;
+
+            $this->core->page_title = $data['NAME'];
 
         }
 
@@ -82,6 +132,8 @@ class module {
         for($i = 0; $i < count($array); $i++) {
 
             $array[$i]['FAVORITE'] = $this->getFavorite(intval($array[$i]['ID']), $this->user->iduser);
+            $array[$i]['RENT'] = $this->getRent(intval($array[$i]['ID']));
+            $array[$i]['READ'] = $this->getRead(intval($array[$i]['ID']));
 
             $data = $array[$i];
 
@@ -162,7 +214,9 @@ class module {
                 'ELECTRONIC_SRC'=> $book[11],
                 'COVER'         => $book[12],
                 'UUID'          => $book[13],
-                'FAVORITE'      => ''
+                'FAVORITE'      => '',
+                'RENT'          => '',
+                'READ'          => ''
             ];
 
             $array[$i] = $data;
@@ -176,6 +230,8 @@ class module {
         for($i = 0; $i < count($array); $i++) {
 
             $array[$i]['FAVORITE'] = $this->getFavorite(intval($array[$i]['ID']), $this->user->iduser);
+            $array[$i]['RENT'] = $this->getRent(intval($array[$i]['ID']));
+            $array[$i]['READ'] = $this->getRead(intval($array[$i]['ID']));
 
             $data = $array[$i];
 
@@ -221,7 +277,9 @@ class module {
                 'ELECTRONIC_SRC'=> $book[11],
                 'COVER'         => $book[12],
                 'UUID'          => $book[13],
-                'FAVORITE'      => ''
+                'FAVORITE'      => '',
+                'RENT'          => '',
+                'READ'          => ''
             ];
 
             $array[$i] = $data;
@@ -235,6 +293,8 @@ class module {
         for($i = 0; $i < count($array); $i++) {
 
             $array[$i]['FAVORITE'] = $this->getFavorite(intval($array[$i]['ID']), $this->user->iduser);
+            $array[$i]['RENT'] = $this->getRent(intval($array[$i]['ID']));
+            $array[$i]['READ'] = $this->getRead(intval($array[$i]['ID']));
 
             $data = $array[$i];
 

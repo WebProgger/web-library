@@ -1,0 +1,33 @@
+.rented-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.rented-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.rented-container .side {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+}
+
+.rented-container .side .item {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.rented-container .side .item span {
+    font-size: 12px;
+    color: rgba(128, 128, 128, 0.75);
+    padding-bottom: 2px;
+}
+
+.rented-container .side .item p {
+    font-size: 14px;
+    font-weight: bold;
+}

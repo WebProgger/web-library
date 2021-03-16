@@ -1,9 +1,8 @@
-	<div class="navbar navbar-inverse spl_grp_block">
-		<div class="navbar-inner">
-			<p class="brand spl-btn"><?php echo $data['TITLE']; ?></p>
-		</div>
+<div class="group">
+	<div class="group-title">
+		<?php echo $data['TITLE']; ?>
 	</div>
-
-	<ul class="spl-body" id="spl_adm_grp_<?php echo $data['ID']; ?>">
+	<div class="group-items">
 		<?php echo $data['ITEMS']; ?>
-	</ul>
+	</div>
+</div>

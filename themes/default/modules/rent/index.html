@@ -1,0 +1,34 @@
+<form class="form-add" method="POST" enctype="multipart/form-data">
+
+    <div class="form-add-header">
+        <span class="form-add-title">
+            Аренда книги: <?php echo $data['NAME']; ?>
+        </span>
+    </div>
+
+    <div class="form-add-body">
+
+        <input hidden type="text" id="id" name="id" value="<?php echo $data['ID']; ?>">
+
+        <div class="form-add-item">
+            <label class="form-add-label" for="name">Название:</label>
+            <input class="form-add-input" disabled=true type="text" id="name" name="name" value="<?php echo $data['NAME']; ?>">
+        </div>
+
+        <div class="form-add-item">
+            <label class="form-add-label" for="date_capture">Дата выдачи книги:</label>
+            <input class="form-add-input" required type="date" id="date_capture" name="date_capture" min="<?php echo date('Y-m-d') ?>">
+        </div>
+
+        <div class="form-add-item">
+            <label class="form-add-label" for="date_return">Дата возврата книги:</label>
+            <input class="form-add-input" required type="date" id="date_return" name="date_return" min="<?php echo date('Y-m-d', strtotime('+1 days')) ?>">
+        </div>
+
+    </div>
+
+    <div class="form-add-footer">
+        <button class="form-add-btn">Арендовать</button>
+    </div>
+
+</form>
