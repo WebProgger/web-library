@@ -1,0 +1,9 @@
+<form method="GET">
+    <label for="method">Выберите действие</label>
+    <select name="method" id="method">
+        <option value="edit">Редактировать</option>
+        <option value="delete">Удалить</option>
+    </select>
+    <input type="hidden" name="id" value="<?php echo $data['ID']; ?>">
+    <button type="submit">ОК</button>
+</form>

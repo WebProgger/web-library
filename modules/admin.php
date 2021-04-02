@@ -29,16 +29,21 @@ class module {
 
 		$do = (isset($do)) ? $do : 'panel_menu';
 
-		if(!preg_match("/^[\w\.\-]+$/i", $do)){ $this->core->notify("Ошибка!", "Страница не найдена!", 2); }
+		if($_SERVER['REQUEST_METHOD'] === 'GET') {
+			$do = explode('?', $do);
+			$do = $do[0];
+		}
+
+		//if(!preg_match("/^[\w\.\-]+$/i", $do)){ $this->core->notify("Ошибка!", "Страница не найдена!", 2); }
 
 		if(!file_exists(LIB_MOD_PATH.'admin/'.$do.'.class.php')){
-			$this->core->notify("Ошибка!", "Модуль не найден!", 2);
+			return $this->core->notify("Ошибка!", "Модуль не найден!", 2);
 		}
 
 		require_once(LIB_MOD_PATH.'admin/'.$do.'.class.php');
 
 		if(!class_exists('submodule')){
-			$this->core->notify("Ошибка!", "Модуль не найден!", 2);
+			return $this->core->notify("Ошибка!", "Модуль не найден!", 2);
 		}
 		
 		$submodule = new submodule($this->core);

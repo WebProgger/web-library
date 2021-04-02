@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Дек 10 2020 г., 20:05
+-- Время создания: Апр 02 2021 г., 15:15
 -- Версия сервера: 8.0.15
--- Версия PHP: 5.6.38
+-- Версия PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -75,6 +75,36 @@ CREATE TABLE `books_archive` (
   `uuid` varchar(12) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Дамп данных таблицы `books_archive`
+--
+
+INSERT INTO `books_archive` (`idbook`, `name`, `description`, `author`, `idgenre`, `year`, `idlanguage`, `pages`, `publisher`, `city_print`, `count`, `electronic_src`, `cover`, `uuid`) VALUES
+(6, 'C++ для &quot;чайников&quot;', '&quot;Моим друзьям и семье, которые помогли мне стать &quot;чайником &quot; в еще большей степени, чем я есть на самом деле&quot;.  (Стефан Р. Дэвис)', 'Стефан Рэнди Дэвис', 3, 2003, 1, 15, 'Диалектика', 'Москва, Санкт-Петербург, Киев', 0, '/uploads/electronic_books/5fdb8b43b4514.tmp', '/uploads/books/5fdb8b43b485a.png', 'АЫФВ12'),
+(8, 'Параша Лупалова', 'История жизни необыкновенной и неустрашимой девушки, которая совершила высокий подвиг самоотвержения, и пешком пришла из Сибири в Петербург просить у Государя помилования своему отцу.', 'Местр Ксавье де', 2, 1864, 1, 13, 'Изданiе т-ва М. О. Вольфъ', 'Санкт-Петербург', 10, '', '/uploads/books/sdjaisdjaisd1213.jpg', '1213aad'),
+(9, 'HTML и CSS. Разработка и дизайн веб-сайтов', 'Эта книга – самый простой и интересный способ изучить HTML и CSS. Независимо от стоящей перед вами задачи: спроектировать и разработать веб-сайт с нуля или получить больше контроля над уже существующим сайтом, эта книга поможет вам создать привлекательный, дружелюбный к пользователю веб-контент. Простой визуальный способ подачи информации с понятными примерами и небольшим фрагментом кода знакомит с новой темой на каждой странице. Вы найдете практические советы о том, как организовать и спроектировать страницы вашего сайта, и после прочтения книги сможете разработать свой веб-сайт профессионального вида и удобный в использовании.', 'Дакетт Джон', 3, 2016, 1, 100, '', '', 5, '/uploads/electronic_books/sdajisdj1213s.pdf', '/uploads/books/sjdhasudhuasd.jpg', 'sdasd123'),
+(10, 'Параша Лупалова', 'История жизни необыкновенной и неустрашимой девушки, которая совершила высокий подвиг самоотвержения, и пешком пришла из Сибири в Петербург просить у Государя помилования своему отцу.', 'Местр Ксавье де', 2, 1864, 1, 13, 'Изданiе т-ва М. О. Вольфъ', 'Санкт-Петербург', 0, '/uploads/electronic_books/1288d2u8usad.fb2', '/uploads/books/sdjaisdjaisd1213.jpg', '1213aad'),
+(11, 'Параша Лупалова', 'История жизни необыкновенной и неустрашимой девушки, которая совершила высокий подвиг самоотвержения, и пешком пришла из Сибири в Петербург просить у Государя помилования своему отцу.', 'Местр Ксавье де', 2, 1864, 1, 13, 'Изданiе т-ва М. О. Вольфъ', 'Санкт-Петербург', 0, '/uploads/electronic_books/1288d2u8usad.fb2', '/uploads/books/sdjaisdjaisd1213.jpg', '1213aad');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `favorites`
+--
+
+CREATE TABLE `favorites` (
+  `idfavorite` int(11) NOT NULL,
+  `iduser` int(11) DEFAULT NULL,
+  `idbook` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `favorites`
+--
+
+INSERT INTO `favorites` (`idfavorite`, `iduser`, `idbook`) VALUES
+(67, 2, 9);
+
 -- --------------------------------------------------------
 
 --
@@ -91,8 +121,9 @@ CREATE TABLE `genres` (
 --
 
 INSERT INTO `genres` (`idgenre`, `name`) VALUES
-(1, 'Общее'),
-(2, 'Русская классическая проза');
+(2, 'Русская классическая проза'),
+(3, 'Программирование'),
+(4, 'Боевики');
 
 -- --------------------------------------------------------
 
@@ -110,7 +141,8 @@ CREATE TABLE `languages` (
 --
 
 INSERT INTO `languages` (`idlanguage`, `name`) VALUES
-(1, 'Русский');
+(1, 'Русский'),
+(2, 'Английский');
 
 -- --------------------------------------------------------
 
@@ -131,7 +163,8 @@ CREATE TABLE `menu` (
 
 INSERT INTO `menu` (`idmenu`, `title`, `url`, `permissions`) VALUES
 (1, 'Главная', '/', '1'),
-(2, 'Панель управления', '/admin', '2');
+(2, 'Панель управления', '/admin', '2'),
+(3, 'Каталог книг', '/books', '1');
 
 -- --------------------------------------------------------
 
@@ -153,7 +186,8 @@ CREATE TABLE `menu_admin` (
 --
 
 INSERT INTO `menu_admin` (`idmenu`, `title`, `url`, `permissions`, `idgroup`, `icon`) VALUES
-(1, 'Добавление электронных изданий', '/admin/electronic_books', '2', 1, NULL);
+(1, 'Добавление книг', '/admin/electronic_books', '2', 1, '/uploads/admin_menu/add_book.png'),
+(7, 'Книги', '/admin/books', '2', 1, '/uploads/admin_menu/books.png');
 
 -- --------------------------------------------------------
 
@@ -171,7 +205,8 @@ CREATE TABLE `menu_admin_group` (
 --
 
 INSERT INTO `menu_admin_group` (`idgroup`, `title`) VALUES
-(1, 'Общее');
+(1, 'Книги'),
+(2, 'Тест');
 
 -- --------------------------------------------------------
 
@@ -202,7 +237,9 @@ CREATE TABLE `rented_books` (
   `idrented` int(11) NOT NULL,
   `iduser` int(11) DEFAULT NULL,
   `idbook` int(11) DEFAULT NULL,
-  `count` int(11) DEFAULT NULL
+  `date_capture` date DEFAULT NULL,
+  `date_return` date DEFAULT NULL,
+  `idstatus` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -228,6 +265,28 @@ INSERT INTO `roles` (`idrole`, `name`, `permissions`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `statuses`
+--
+
+CREATE TABLE `statuses` (
+  `idstatus` int(11) NOT NULL,
+  `name` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `statuses`
+--
+
+INSERT INTO `statuses` (`idstatus`, `name`) VALUES
+(1, 'В обработке'),
+(5, 'Возвращено'),
+(3, 'Выдано'),
+(2, 'Готово к выдаче'),
+(4, 'Ожидается возврат');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `users`
 --
 
@@ -247,9 +306,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`iduser`, `surname`, `name`, `middle_name`, `idrole`, `mail`, `password`, `token`) VALUES
-(1, 'Минаков', 'Александр', 'Андреевич', 1, 'sasha_17082001@mail.ru', '5f1bc1cc080a9edd2f002274aad73433', 'X7nslAt3wBgDMnC7sijpRi65V0QT7xPF'),
-(2, 'Админов', 'Админ', 'Админович', 1, 'admin@library.ru', '21232f297a57a5a743894a0e4a801fc3', 'psC51MKAQTH1EuqlZIp8Ap3m314RWuWX'),
-(4, 'Анатолий', 'Александрович', 'Волков', 2, 'volkov.tolya@mail.ru', 'e10adc3949ba59abbe56e057f20f883e', 'rZ8l1BdCNHLYZnvPSPnwZOx2Wq69opyH');
+(2, 'Админов', 'Админ', 'Админович', 1, 'admin@library.ru', '5f1bc1cc080a9edd2f002274aad73433', 'Asf96rEejABKaz4XylNtbu9mpmbG0JGp'),
+(4, 'Анатолий', 'Александрович', 'Волков', 2, 'volkov.tolya@mail.ru', 'e10adc3949ba59abbe56e057f20f883e', 'rZ8l1BdCNHLYZnvPSPnwZOx2Wq69opyH'),
+(5, 'Минаков', 'Александр', 'Андреевич', 2, 'alexsandr.minakov@mail.ru', 'e10adc3949ba59abbe56e057f20f883e', '4dt0F6qtVrBbRberLZ99Vpi3Fx8Nz9xD'),
+(6, 'Тестов', 'Тест', 'Тестович', 2, 'test@mail.ru', 'e10adc3949ba59abbe56e057f20f883e', 'd2zeagb4mVKlqdINtUIwJSr3mtXjN6Qx');
 
 --
 -- Индексы сохранённых таблиц
@@ -270,6 +330,14 @@ ALTER TABLE `books_archive`
   ADD PRIMARY KEY (`idbook`),
   ADD KEY `fk_books_genres1_idx` (`idgenre`),
   ADD KEY `fk_books_languages1_idx` (`idlanguage`);
+
+--
+-- Индексы таблицы `favorites`
+--
+ALTER TABLE `favorites`
+  ADD PRIMARY KEY (`idfavorite`),
+  ADD KEY `fk_favorites_users1_idx` (`iduser`),
+  ADD KEY `fk_favorites_books1_idx` (`idbook`);
 
 --
 -- Индексы таблицы `genres`
@@ -314,13 +382,21 @@ ALTER TABLE `permissions`
 ALTER TABLE `rented_books`
   ADD PRIMARY KEY (`idrented`),
   ADD KEY `fk_rented_books_books1_idx` (`idbook`),
-  ADD KEY `fk_rented_books_users1_idx` (`iduser`);
+  ADD KEY `fk_rented_books_users1_idx` (`iduser`),
+  ADD KEY `fk_rented_books_statuses1_idx` (`idstatus`);
 
 --
 -- Индексы таблицы `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`idrole`);
+
+--
+-- Индексы таблицы `statuses`
+--
+ALTER TABLE `statuses`
+  ADD PRIMARY KEY (`idstatus`),
+  ADD UNIQUE KEY `name_UNIQUE` (`name`);
 
 --
 -- Индексы таблицы `users`
@@ -337,43 +413,49 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `books`
 --
 ALTER TABLE `books`
-  MODIFY `idbook` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idbook` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT для таблицы `books_archive`
 --
 ALTER TABLE `books_archive`
-  MODIFY `idbook` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idbook` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT для таблицы `favorites`
+--
+ALTER TABLE `favorites`
+  MODIFY `idfavorite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT для таблицы `genres`
 --
 ALTER TABLE `genres`
-  MODIFY `idgenre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idgenre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `languages`
 --
 ALTER TABLE `languages`
-  MODIFY `idlanguage` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idlanguage` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `idmenu` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idmenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `menu_admin`
 --
 ALTER TABLE `menu_admin`
-  MODIFY `idmenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idmenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT для таблицы `menu_admin_group`
 --
 ALTER TABLE `menu_admin_group`
-  MODIFY `idgroup` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idgroup` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `permissions`
@@ -385,7 +467,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT для таблицы `rented_books`
 --
 ALTER TABLE `rented_books`
-  MODIFY `idrented` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idrented` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `roles`
@@ -394,10 +476,16 @@ ALTER TABLE `roles`
   MODIFY `idrole` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT для таблицы `statuses`
+--
+ALTER TABLE `statuses`
+  MODIFY `idstatus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `iduser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -418,6 +506,13 @@ ALTER TABLE `books_archive`
   ADD CONSTRAINT `fk_books_languages10` FOREIGN KEY (`idlanguage`) REFERENCES `languages` (`idlanguage`);
 
 --
+-- Ограничения внешнего ключа таблицы `favorites`
+--
+ALTER TABLE `favorites`
+  ADD CONSTRAINT `fk_favorites_books1` FOREIGN KEY (`idbook`) REFERENCES `books` (`idbook`),
+  ADD CONSTRAINT `fk_favorites_users1` FOREIGN KEY (`iduser`) REFERENCES `users` (`iduser`);
+
+--
 -- Ограничения внешнего ключа таблицы `menu_admin`
 --
 ALTER TABLE `menu_admin`
@@ -428,6 +523,7 @@ ALTER TABLE `menu_admin`
 --
 ALTER TABLE `rented_books`
   ADD CONSTRAINT `fk_rented_books_books1` FOREIGN KEY (`idbook`) REFERENCES `books` (`idbook`),
+  ADD CONSTRAINT `fk_rented_books_statuses1` FOREIGN KEY (`idstatus`) REFERENCES `statuses` (`idstatus`),
   ADD CONSTRAINT `fk_rented_books_users1` FOREIGN KEY (`iduser`) REFERENCES `users` (`iduser`);
 
 --

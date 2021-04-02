@@ -1,0 +1,29 @@
+table {
+    border-collapse: collapse;
+    text-align: center;
+    width: 100%;
+    font-size: 14px;
+}
+
+tr:hover td {
+    background: rgba(128, 128, 128, 0.75);
+    cursor: pointer;
+}
+
+th {
+    background: #AFCDE7;
+    color: #4285f4;
+    padding: 10px 20px;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: white;
+}
+
+td {
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: white;
+    background: #D8E6F3;
+    padding: 10px;
+    color: #4285f4;
+}
