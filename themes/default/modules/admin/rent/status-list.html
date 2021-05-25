@@ -1,0 +1,12 @@
+<div class="block">
+    <div class="block-content">
+        <form action="/admin/rent" method="POST">
+            <input type="hidden" name="id" value="<?php echo $data['ID']; ?>">
+            <select name="status" id="status">
+                <?php echo $data['STATUS']; ?>
+                <?php echo $data['STATUSES']; ?>
+            </select>
+            <button type="submit" class="btn">Сохранить</button>
+        </form>
+    </div>
+</div>

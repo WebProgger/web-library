@@ -61,6 +61,81 @@ class submodule {
         return $this->core->sp(LIB_THEME_MOD_PATH.'admin/rent/menu.html', $data);
     }
 
+    private function getIdStatus($id) {
+        $id = intval($id);
+
+        $query = $this->db->query("SELECT `rented_books`.`idstatus` FROM `rented_books` WHERE `rented_books`.`idrented` = $id LIMIT 1");
+
+        if(!$query) { return $this->core->notify('Ошибка!', 'Системная ошибка!', 2, 'admin/rent'); }
+
+        $ar = $this->db->fetch_array($query);
+
+        return $ar[0];
+    }
+
+    private function getStatus($id) {
+        $id = intval($id);
+
+        $query = $this->db->query("SELECT `rented_books`.`idstatus`, `statuses`.`name` FROM `rented_books`, `statuses` 
+            WHERE `rented_books`.`idstatus` = `statuses`.`idstatus` AND `rented_books`.`idrented` = $id LIMIT 1");
+
+        if(!$query) { return $this->core->notify('Ошибка!', 'Системная ошибка!', 2, 'admin/rent'); }
+
+        $ar = $this->db->fetch_array($query);
+
+        $data = [
+            'ID'    => $ar[0],
+            'NAME'  => $ar[1]
+        ];
+        
+        return $this->core->sp(LIB_THEME_MOD_PATH.'admin/rent/status-id.html', $data);
+    }
+
+    private function getStatuses($id) {
+
+        $query = $this->db->query("SELECT `statuses`.`idstatus`, `statuses`.`name` FROM `statuses` WHERE `statuses`.`idstatus` != $id");
+
+        if(!$query) { return $this->core->notify('Ошибка!', 'Системная ошибка!', 2, 'admin/rent'); }
+
+        ob_start();
+
+        while($ar = $this->db->fetch_array($query)) {
+
+            $data = [
+                'ID'    => $ar[0],
+                'NAME'  => $ar[1]
+            ];
+
+            echo $this->core->sp(LIB_THEME_MOD_PATH.'admin/rent/status-id.html', $data);
+
+        }
+
+        return ob_get_clean();
+
+    }
+
+    private function methodEditView($id) {
+       
+        $data = [
+            'ID'       => $id,
+            'STATUSES' => $this->getStatuses($this->getIdStatus($id)),
+            'STATUS'   => $this->getStatus($id),
+        ];
+
+        return $this->core->sp(LIB_THEME_MOD_PATH.'admin/rent/status-list.html', $data);
+        
+    }
+
+    private function methodEdit($idrented, $idstatus) {
+
+        $query = $this->db->query("UPDATE `rented_books` SET `idstatus` = $idstatus WHERE `idrented` = $idrented");
+
+        if(!$query) { return $this->core->notify('Ошибка!', 'Системная ошибка!', 2, 'admin/rent'); }
+
+        return $this->core->notify('Успех!', 'Изменение успешно применены!', 3, 'admin/rent');
+
+    }
+
     private function methodDelete($id) {
         $id = intval($id);
 
@@ -81,7 +156,7 @@ class submodule {
                 return $this->methodMenu($id);
             break;
             case 'edit':
-
+                return $this->methodEditView($id);
             break;
             case 'delete':
                 return $this->methodDelete($id);
@@ -99,6 +174,10 @@ class submodule {
 
         if($_SERVER['REQUEST_METHOD'] === 'GET') {
             if($_GET['method'] && !empty($_GET['method'] && $_GET['id'] && !empty($_GET['id']))) { return $this->Handler($_GET['method'], $_GET['id']); }
+        }
+
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            return $this->methodEdit($_POST['id'], $_POST['status']);
         }
 
 		$data = [
