@@ -158,6 +158,15 @@ class module {
         if(!empty($_GET['language'])) { $par = 'language'; $val = $_GET['language']; }
         if(!empty($_GET['pages'])) { $par = 'pages'; $val = $_GET['pages']; }
         if(!empty($_GET['idgenre'])) { $par = 'idgenre'; $val = $_GET['idgenre']; }
+        if(!empty($_GET['search'])) {
+            $string = iconv("UTF-8", "windows-1251", $_GET['search']);
+            $val = "%";
+            foreach(str_split($string) as $el) {
+                $val = $val . iconv("windows-1251","UTF-8", $el) . "%";
+            }
+        }
+
+        
 
         if(!empty($_GET['genre'])) {
 
@@ -180,6 +189,13 @@ class module {
             $query = $this->db->query("SELECT `books`.`idbook`, `books`.`name`, `books`.`description`, `books`.`author`, `genres`.`name`, `books`.`year`,
                 `languages`.`name`, `books`.`pages`, `books`.`publisher`, `books`.`city_print`, `books`.`count`, `books`.`electronic_src`, `books`.`cover`, `books`.`uuid`
                 FROM `books`, `genres`, `languages` WHERE `books`.`idgenre` = `genres`.`idgenre` AND `books`.`idlanguage` = `languages`.`idlanguage` AND `genres`.`$par` = '$val'");
+
+        } else if(!empty($_GET['search'])) {
+
+            $query = $this->db->query("SELECT `books`.`idbook`, `books`.`name`, `books`.`description`, `books`.`author`, `genres`.`name`, `books`.`year`,
+                `languages`.`name`, `books`.`pages`, `books`.`publisher`, `books`.`city_print`, `books`.`count`, `books`.`electronic_src`, `books`.`cover`, `books`.`uuid`
+                FROM `books`, `genres`, `languages` WHERE `books`.`idgenre` = `genres`.`idgenre` AND `books`.`idlanguage` = `languages`.`idlanguage` AND 
+                (`books`.`name` LIKE '$val' OR `books`.`author` LIKE '$val')");
 
         } else {
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Апр 02 2021 г., 15:15
+-- Время создания: Май 25 2021 г., 17:29
 -- Версия сервера: 8.0.15
 -- Версия PHP: 7.3.2
 
@@ -50,7 +50,8 @@ CREATE TABLE `books` (
 --
 
 INSERT INTO `books` (`idbook`, `name`, `description`, `author`, `idgenre`, `year`, `idlanguage`, `pages`, `publisher`, `city_print`, `count`, `electronic_src`, `cover`, `uuid`) VALUES
-(9, 'Параша Лупалова', 'История жизни необыкновенной и неустрашимой девушки, которая совершила высокий подвиг самоотвержения, и пешком пришла из Сибири в Петербург просить у Государя помилования своему отцу.', 'Местр Ксавье де', 2, 1864, 1, 13, 'Изданiе т-ва М. О. Вольфъ', 'Санкт-Петербург', 0, '/uploads/electronic_books/1288d2u8usad.fb2', '/uploads/books/sdjaisdjaisd1213.jpg', '1213aad');
+(9, 'Параша Лупалова', 'История жизни необыкновенной и неустрашимой девушки, которая совершила высокий подвиг самоотвержения, и пешком пришла из Сибири в Петербург просить у Государя помилования своему отцу.', 'Местр Ксавье де', 2, 1864, 1, 13, 'Изданiе т-ва М. О. Вольфъ', 'Санкт-Петербург', 0, '/uploads/electronic_books/1288d2u8usad.fb2', '/uploads/books/sdjaisdjaisd1213.jpg', '1213aad'),
+(21, 'Программирование на Python для начинающих', 'Книга \"Программирование на Python для начинающих\" является исчерпывающим руководством для того, чтобы научиться программировать на языке Python. В этой книге с помощью примеров программ и иллюстраций, показывающих результаты работы кода, разбираются все ключевые аспекты языка. Установив свободно распространяемый интерпретатор Python, вы с первого же дня сможете создавать свои собственные исполняемые программы! Познакомившись с основами языка, вы перейдете к объектно-ориентированному программированию и созданию CGI-сценариев для обработки данных веб-форм, научитесь создавать графические приложения с оконным интерфейсом и распространять их на другие устройства. В обучении вам помогут готовые примеры. Книга «Программирование на Python для начинающих» идеально подойдет программистам, переключающимся на работу с другим языком, студентам и школьникам изучающим язык Python. Самое важное: - функции - переменные - ключевые слова - методы - объекты - операторы - атрибуты - запросы - и многое другое отзыв: Отличный старт для решивших начать изучать программирование с Python. Даже если вы никогда до этого не создавали программы, с помощью этой книги вы сможете пройти все шаги от установки интерпретатора до запуска и отладки своих первых приложений.  Александр Корчагин, Руководитель отдела финансовых информационных систем, Центральная Дистрибьюторская Компания', 'МакГрат Майк', 3, 2015, 1, 120, 'ООО Издательство Эксмо', 'Москва', 0, '/uploads/electronic_books/60aa23d719490.tmp', '/uploads/books/60aa23d7196a0.png', '123asdsa1');
 
 -- --------------------------------------------------------
 
@@ -84,7 +85,8 @@ INSERT INTO `books_archive` (`idbook`, `name`, `description`, `author`, `idgenre
 (8, 'Параша Лупалова', 'История жизни необыкновенной и неустрашимой девушки, которая совершила высокий подвиг самоотвержения, и пешком пришла из Сибири в Петербург просить у Государя помилования своему отцу.', 'Местр Ксавье де', 2, 1864, 1, 13, 'Изданiе т-ва М. О. Вольфъ', 'Санкт-Петербург', 10, '', '/uploads/books/sdjaisdjaisd1213.jpg', '1213aad'),
 (9, 'HTML и CSS. Разработка и дизайн веб-сайтов', 'Эта книга – самый простой и интересный способ изучить HTML и CSS. Независимо от стоящей перед вами задачи: спроектировать и разработать веб-сайт с нуля или получить больше контроля над уже существующим сайтом, эта книга поможет вам создать привлекательный, дружелюбный к пользователю веб-контент. Простой визуальный способ подачи информации с понятными примерами и небольшим фрагментом кода знакомит с новой темой на каждой странице. Вы найдете практические советы о том, как организовать и спроектировать страницы вашего сайта, и после прочтения книги сможете разработать свой веб-сайт профессионального вида и удобный в использовании.', 'Дакетт Джон', 3, 2016, 1, 100, '', '', 5, '/uploads/electronic_books/sdajisdj1213s.pdf', '/uploads/books/sjdhasudhuasd.jpg', 'sdasd123'),
 (10, 'Параша Лупалова', 'История жизни необыкновенной и неустрашимой девушки, которая совершила высокий подвиг самоотвержения, и пешком пришла из Сибири в Петербург просить у Государя помилования своему отцу.', 'Местр Ксавье де', 2, 1864, 1, 13, 'Изданiе т-ва М. О. Вольфъ', 'Санкт-Петербург', 0, '/uploads/electronic_books/1288d2u8usad.fb2', '/uploads/books/sdjaisdjaisd1213.jpg', '1213aad'),
-(11, 'Параша Лупалова', 'История жизни необыкновенной и неустрашимой девушки, которая совершила высокий подвиг самоотвержения, и пешком пришла из Сибири в Петербург просить у Государя помилования своему отцу.', 'Местр Ксавье де', 2, 1864, 1, 13, 'Изданiе т-ва М. О. Вольфъ', 'Санкт-Петербург', 0, '/uploads/electronic_books/1288d2u8usad.fb2', '/uploads/books/sdjaisdjaisd1213.jpg', '1213aad');
+(11, 'Параша Лупалова', 'История жизни необыкновенной и неустрашимой девушки, которая совершила высокий подвиг самоотвержения, и пешком пришла из Сибири в Петербург просить у Государя помилования своему отцу.', 'Местр Ксавье де', 2, 1864, 1, 13, 'Изданiе т-ва М. О. Вольфъ', 'Санкт-Петербург', 0, '/uploads/electronic_books/1288d2u8usad.fb2', '/uploads/books/sdjaisdjaisd1213.jpg', '1213aad'),
+(12, 'ывфывыф', 'ыфвфывф', 'ыфвфыв', 2, 2021, 1, 2, 'ывфы', 'фывфыв', 2, '/uploads/electronic_books/607d880df02b7.tmp', '/uploads/books/607d880df0518.png', 'фывыфв12');
 
 -- --------------------------------------------------------
 
@@ -103,7 +105,8 @@ CREATE TABLE `favorites` (
 --
 
 INSERT INTO `favorites` (`idfavorite`, `iduser`, `idbook`) VALUES
-(67, 2, 9);
+(69, 2, 21),
+(70, 5, 21);
 
 -- --------------------------------------------------------
 
@@ -187,7 +190,9 @@ CREATE TABLE `menu_admin` (
 
 INSERT INTO `menu_admin` (`idmenu`, `title`, `url`, `permissions`, `idgroup`, `icon`) VALUES
 (1, 'Добавление книг', '/admin/electronic_books', '2', 1, '/uploads/admin_menu/add_book.png'),
-(7, 'Книги', '/admin/books', '2', 1, '/uploads/admin_menu/books.png');
+(7, 'Книги', '/admin/books', '2', 1, '/uploads/admin_menu/books.png'),
+(8, 'Пользователи', '/admin/users', '2', 3, '/uploads/admin_menu/users.png'),
+(9, 'Арендованные книги', '/admin/rent', '2', 1, '/uploads/admin_menu/talon.png');
 
 -- --------------------------------------------------------
 
@@ -206,7 +211,7 @@ CREATE TABLE `menu_admin_group` (
 
 INSERT INTO `menu_admin_group` (`idgroup`, `title`) VALUES
 (1, 'Книги'),
-(2, 'Тест');
+(3, 'Пользователи');
 
 -- --------------------------------------------------------
 
@@ -239,7 +244,7 @@ CREATE TABLE `rented_books` (
   `idbook` int(11) DEFAULT NULL,
   `date_capture` date DEFAULT NULL,
   `date_return` date DEFAULT NULL,
-  `idstatus` int(11) DEFAULT NULL
+  `idstatus` int(11) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -306,10 +311,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`iduser`, `surname`, `name`, `middle_name`, `idrole`, `mail`, `password`, `token`) VALUES
-(2, 'Админов', 'Админ', 'Админович', 1, 'admin@library.ru', '5f1bc1cc080a9edd2f002274aad73433', 'Asf96rEejABKaz4XylNtbu9mpmbG0JGp'),
+(2, 'Админов', 'Админ', 'Админович', 1, 'admin@library.ru', '5f1bc1cc080a9edd2f002274aad73433', 'FFkNvVdz0oAcvtTLjp48KuxSECyRCeDR'),
 (4, 'Анатолий', 'Александрович', 'Волков', 2, 'volkov.tolya@mail.ru', 'e10adc3949ba59abbe56e057f20f883e', 'rZ8l1BdCNHLYZnvPSPnwZOx2Wq69opyH'),
-(5, 'Минаков', 'Александр', 'Андреевич', 2, 'alexsandr.minakov@mail.ru', 'e10adc3949ba59abbe56e057f20f883e', '4dt0F6qtVrBbRberLZ99Vpi3Fx8Nz9xD'),
-(6, 'Тестов', 'Тест', 'Тестович', 2, 'test@mail.ru', 'e10adc3949ba59abbe56e057f20f883e', 'd2zeagb4mVKlqdINtUIwJSr3mtXjN6Qx');
+(5, 'Минаков', 'Александр', 'Андреевич', 2, 'alexsandr.minakov@mail.ru', 'e10adc3949ba59abbe56e057f20f883e', 'XE8qLSATGgVXzkjMS1I3w1hGaV0MunpJ');
 
 --
 -- Индексы сохранённых таблиц
@@ -413,19 +417,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `books`
 --
 ALTER TABLE `books`
-  MODIFY `idbook` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `idbook` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT для таблицы `books_archive`
 --
 ALTER TABLE `books_archive`
-  MODIFY `idbook` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idbook` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT для таблицы `favorites`
 --
 ALTER TABLE `favorites`
-  MODIFY `idfavorite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `idfavorite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT для таблицы `genres`
@@ -449,13 +453,13 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT для таблицы `menu_admin`
 --
 ALTER TABLE `menu_admin`
-  MODIFY `idmenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idmenu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT для таблицы `menu_admin_group`
 --
 ALTER TABLE `menu_admin_group`
-  MODIFY `idgroup` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idgroup` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `permissions`
@@ -467,7 +471,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT для таблицы `rented_books`
 --
 ALTER TABLE `rented_books`
-  MODIFY `idrented` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idrented` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `roles`

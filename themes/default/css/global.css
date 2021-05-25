@@ -331,6 +331,64 @@ nav {
     width: 100%;
 }
 
+.flex-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.flex-item, .right {
+    margin-left: 30px;
+}
+
+.flex-content .flex-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-item h2 {
+    font-weight: 300;
+    font-size: 18px;
+    padding: 10px 0;
+    color: #4285f4;
+}
+
+.flex-item ul {
+    padding: 10px;
+    list-style: none;
+}
+
+.flex-item ul li {
+    padding: 3px 0;
+}
+
+.search-block {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 20px 0;
+    margin-bottom: -40px;
+}
+
+.search-block-content {
+    display: flex;
+    background: rgba(66,133,244,0.5);
+    padding: 10px 5px;
+}
+
+.search-block-content h2 {
+    padding: 8px 10px;
+    color: #4285f4;
+}
+
+.search-block-content input {
+    padding: 10px;
+}
+
+.search-block-content button {
+    padding: 10px;
+}
+
 @media screen and (max-width: 765px) {
     
     .toggle {

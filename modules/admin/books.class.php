@@ -60,6 +60,29 @@ class submodule {
         return $this->core->sp(LIB_THEME_MOD_PATH.'admin/books/menu.html', $data);
     }
 
+    private function methodEdit($id) {
+        $id = intval($id);
+
+        $select = $this->db->query("SELECT `books`.`idbook`, `books`.`name`, `genres`.`name`, `languages`.`name`, `books`.`count`, `books`.`uuid` 
+            FROM `books`, `genres`, `languages` 
+                WHERE `books`.`idgenre` = `genres`.`idgenre` AND `books`.`idlanguage` = `languages`.`idlanguage` AND `books`.`idbook` = $id LIMIT 1");
+        
+        if(!$query || $this->db->num_rows($query) < 1) { return $this->core->sp(LIB_THEME_MOD_PATH.'admin/books/books-none.html'); }
+
+        $ar = $this->db->fetch_array($query);
+
+        $data = [
+            'ID'            => $ar[0],
+            'NAME'          => $ar[1],
+            'GENRE'         => $ar[2],
+            'LANGUAGE'      => $ar[3],
+            'COUNT'         => $ar[4],
+            'UUID'          => $ar[5]
+        ];
+
+        return;
+    }
+
     private function methodDelete($id) {
         $id = intval($id);
 
@@ -114,7 +137,7 @@ class submodule {
                 return $this->methodMenu($id);
             break;
             case 'edit':
-
+                return $this->methodEdit($id);
             break;
             case 'delete':
                 return $this->methodDelete($id);
